@@ -1,0 +1,589 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% fphw Assignment
+% LaTeX Template
+% Version 1.0 (27/04/2019)
+%
+% This template originates from:
+% https://www.LaTeXTemplates.com
+%
+% Authors:
+% Class by Felipe Portales-Oliva (f.portales.oliva@gmail.com) with template 
+% content and modifications by Vel (vel@LaTeXTemplates.com)
+%
+% Template (this file) License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[
+	12pt, % Default font size, values between 10pt-12pt are allowed
+	%letterpaper, % Uncomment for US letter paper size
+	%spanish, % Uncomment for Spanish
+]{fphw}
+
+% Template-specific packages
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[dvipsnames]{xcolor}
+\usepackage{graphicx} % Required for including images
+\usepackage{amsmath}
+\usepackage{booktabs} % Required for better horizontal rules in tables
+\usepackage{listings} % Required for insertion of code
+\usepackage{enumerate} % To modify the enumerate environment
+\usepackage{ragged2e}
+\usepackage{cancel}
+\usepackage{MnSymbol,bbding,pifont}
+\usepackage{lscape}
+\usepackage{array}
+\newcolumntype{M}{>{$}c<{$}}
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{Assignment \#3} % Assignment title
+
+\author{Luis Alberto Ballado Aradias} % Student name
+
+\date{\today} % Due date
+
+\institute{Centro de Investigación y de Estudios Avanzados del IPN \\ Unidad Tamaulipas} % Institute or school name
+
+\class{Computational Mathematics (Sep - Dec 2022)} % Course or class name
+
+\professor{Dr. Mario Garza Fabre} % Professor or teacher in charge of the assignment
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Output the assignment title, created automatically using the information in the custom commands above
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT CONTENT
+%----------------------------------------------------------------------------------------
+{\color{teal}
+\dotfill
+Section 1.1 (page 12)
+\dotfill}
+
+\section*{{\color{Apricot}Question 1}}
+%------------------------------------------------
+
+Knowing that a proposition is a declarative sentence (that is, a sentence that declares a fact) that is either true or false, but both we can answer the following question.
+
+\begin{enumerate}
+\item Which of these sentences are propositions? What are the truth values of those are propositions?
+  \begin{enumerate}
+  \item Boston is the capital of Massachusetts\\
+    It is a proposition because it is True and Valid \\
+    \textbf{(YES, TRUE)} 
+  \item Miami is the capital of Florida\\
+    It is a proposition but it is not True, according to Google the capital of Florida is Tallahassee \\
+    \textbf{(YES, FALSE)}
+  \item $2+3=5$\\
+    It is a proposition and the math is correct. \\
+    \textbf{(YES, TRUE)}
+  \item $5+7=10$\\
+    It is a proposition but the math is not correct. \\
+    \textbf{(YES, FALSE)}
+  \item $x+2=11$\\
+    It is \textbf{not} a proposition because does not have all the data. \\
+    \textbf{(NO PROPOSITION)}
+  \item Answer this question\\
+    It is \textbf{not} a proposition because it is ambiguous.\\
+    \textbf{(NO PROPOSITION)}
+  \end{enumerate}
+\end{enumerate}
+
+%----------------------------------------------------------------------------------------
+
+\section*{{\color{Aquamarine}Question 3}}
+%------------------------------------------------
+
+\begin{enumerate}
+  \setcounter{enumi}{2}
+\item What is the negation of each of these propositions?
+  \begin{enumerate}
+  \item Mei has an MP3 player\\
+    \textbf{Mei does not have an MP3 Player}
+  \item There is no pollution in New Jersey\\
+    \textbf{There is pollution in New Jersey}
+  \item $2+1=3$\\
+    $\boldsymbol{2+1 \ne 3}$ 
+  \item The summer in Maine is hot and sunny\\
+    \textbf{The summer in Maine is not hot and not sunny}
+  \end{enumerate}
+
+\end{enumerate}
+%----------------------------------------------------------------------------------------
+
+\section*{{\color{Bittersweet}Question 5}}
+%------------------------------------------------
+
+\begin{enumerate}
+  \setcounter{enumi}{4}
+\item What is the negation of each of these propositions?
+  \begin{enumerate}
+  \item Steve has more than 100 GB free disk space on his laptop\\
+    \textbf{Steve does not have more than 100 GB freedisk}
+  \item Zach blocks e-mails and texts from Jennifer\\
+    \textbf{Zach does not block emails from Jennifer}
+  \item $7*11*13=990$\\
+    $\boldsymbol{7*11*13 \ne 990}$
+  \item Diane rode her bicycle 100 miles on Sunday\\
+    \textbf{Diane did not ride her bicycle 100 miles on Sunday}
+  \end{enumerate}
+  
+\end{enumerate}
+
+%----------------------------------------------------------------------------------------
+
+\section*{{\color{Blue}Question 9}}
+%------------------------------------------------
+
+\begin{enumerate}
+  \setcounter{enumi}{8}
+\item Let $\boldsymbol{p}$ “Swimming at the New Jersey shore is allowed”\\
+  and $\boldsymbol{q}$ “Sharks have been spotted near the shore,”\\
+  Express each of these compound propositions as an English sentence
+  
+  \begin{enumerate}
+  \item $\neg{q}$\\
+    \textbf{Sharks have not been spotted near the Shore}
+  \item $p \land q$\\
+    \textbf{Swimming at the New Jersey shore is allowed and Sharks have been spotted near the shore}
+  \item $\neg{p} \lor q$\\
+    \textbf{Swimming at the New Jersey shore is not allowed or sharks have been spotted near the shore}
+  \item $p \implies \neg{q}$\\
+    \textbf{If swimming at the New Jersey shore is allowed, then sharks have not been spotted near the shore}
+  \item $\neg{q} \implies p$\\
+    \textbf{If sharks have not been spotted near the shore, then swimming at the New Jersey shore is allowed}
+  \item $\neg{p} \implies \neg{q}$\\
+    \textbf{If swimming at the New Jersey shore is not allowed, then sharks have not been spotted near the shore}
+  \item $p \iff \neg{q}$\\
+    \textbf{Swimming at the New Jersey shore is allowed if and only if sharks have not been spotted near the shore}
+  \item \FiveStarConvex $\neg{p} \land (p \lor \neg{q})$\\
+    \textbf{Looking for a equivalence from the original expresion we have:}\\
+    \begin{center}
+    $(\neg p \land p) \lor (\neg p \lor \neg q)$ \emph{Appliying distributive}\\
+    $F \lor (\neg p \lor \neg q)$ \emph{Dominance}\\
+    $\neg p \lor \neg q$  \emph{Equivalent expression}
+    \end{center}
+    \textbf{Swimming at the New Jersey shore is not allowed or sharks have not been spotted near the shore}
+  \end{enumerate}
+
+\end{enumerate}
+%----------------------------------------------------------------------------------------
+
+\section*{{\color{BlueGreen}Question 13}}
+%------------------------------------------------
+
+\begin{enumerate}
+  \setcounter{enumi}{12}
+\item Let \textbf{p} and \textbf{q} be the propositions\\
+  \textbf{p:} You drive over 65 miles per hour.\\
+  \textbf{q:} You get a speeding ticket.\\ \\
+  Write these propositions using p and q and logical connectives\\
+  (including negations)
+  
+  \begin{enumerate}
+  \item You do not drive over 65 miles per hour \\
+    $\boldsymbol{\neg p}$
+  \item You drive over 65 miles per hour, but you do not get a speeding ticket \\
+    $\boldsymbol{p \land \neg q}$ \\
+    \emph{**Note that in logic the word \textbf{but} sometimes is used insted of \textbf{and} in conjunction}
+  \item You will get a speeding ticket if you drive over 65 miles per hour \\
+    $\boldsymbol{p \implies q}$
+  \item If you do not drive over 65 miles per hour, then you will not get a speeding ticket \\
+    $\boldsymbol{\neg p \implies \neg q}$
+  \item Driving over 65 miles per hour is sufficient for getting a speeding ticket \\
+    $\boldsymbol{p \iff q}$
+  \item You get a speeding ticket, but you do not drive over 65 miles per hour \\ 
+    $\boldsymbol{q \land \neg p}$
+  \item Whenever you get a speeding ticket, you are driving over 65 miles per hour \\
+    $\boldsymbol{q \implies p}$
+    \end{enumerate}
+\end{enumerate}
+
+\newpage
+\section*{{\color{BlueViolet}Question 15}}
+%------------------------------------------------
+
+\begin{enumerate}
+  \setcounter{enumi}{14}
+\item Let p, q, and r be the propositions\\
+  \textbf{p:} Grizzly bears have been seen in the area.\\
+  \textbf{q:} Hiking is safe on the trail.\\
+  \textbf{r:} Berries are ripe along the trail.\\ \\
+  Write these propositions using p, q and r and logical connectives \\
+  (including negations)
+  $\boldsymbol{}$
+  \begin{enumerate}
+
+  \item Berries are ripe along the trail, but grizzly bears have not been seen in the area \\
+    $\boldsymbol{r \land \neg p}$
+  \item Grizzly bears have not been seen in the area and hiking on the trail is safe, but berries are ripe along the trail\\
+    $\boldsymbol{\neg p \land q \land r}$
+  \item If berries are ripe along the trail, hiking is safe if and only if grizzly bears have not been seen in the area.\\
+    $\boldsymbol{r \implies (q \iff \neg p)}$
+  \item It is not safe to hike on the trail, but grizzly bears have not been seen in the area and the berries along the trail are ripe\\
+    $\boldsymbol{\neg q \land \neg p \land r}$
+  \item For hiking on the trail to be safe, it is necessary but not sufficient that berries not be ripe along the trail and for grizzly bears not to have been seen in the area\\
+    $\boldsymbol{(q \implies (\neg r \land \neg p))}$ \FiveStarConvex
+  \item Hiking is not safe on the trail whenever grizzly bears have been seen in the area and berries are ripe along the trail\\
+    $\boldsymbol{(p \land r) \implies \neg q}$ 
+  \end{enumerate}
+  
+\end{enumerate}
+
+\section*{{\color{BrickRed}Question 17}}
+%------------------------------------------------
+
+\begin{enumerate}
+  \setcounter{enumi}{16}
+\item Determine whether each of these conditional statements is true or false
+  \begin{enumerate}
+  \item If $1+1=2$, then $2+2=5$\\
+    The first part is true, but the second not. \\By the table of truth $\boldsymbol{True \implies False \cong False}$
+  \item If $1+1=3$, then $2+2=4$\\
+    The first part is false, but the second is true. \\By the implication table of truth $\boldsymbol{False \implies True \cong True}$
+  \item If $1+1=3$, then $2+2=5$\\
+    The first part is false also the second. \\By the implication table of truth $\boldsymbol{False \implies False \cong True}$
+  \item If monkey can fly, then $1+1=3$\\
+    The first part is not true also the second. \\By the implication table of truth $\boldsymbol{False \implies False \cong True}$
+  \end{enumerate}
+\end{enumerate}
+
+
+\section*{{\color{Brown}Question 27}}
+%------------------------------------------------
+
+\begin{enumerate}
+\setcounter{enumi}{26}
+\item State the converse, contrapositice, and inverse of each of these conditional statements.\\
+  Let us remmember that\\
+  $p \implies q$ the converse is $q \implies p$, the inverse is $\neg p \implies \neg q$ and the contrapositive is $\neg q \implies \neg p$ knowing that ..
+  
+  \begin{enumerate}
+  \item If it snows today, I will ski tomorrow \\
+    \begin{enumerate}
+    \item \textbf{Converse:} I will ski tomorrow \textbf{only if} it snows today.
+    \item \textbf{Contrapositive:} If I do \textbf{not} ski tomorrow, then it will \textbf{not} have snowed today.
+    \item \textbf{Inverse:} If it does \textbf{not} snow today, then I will \textbf{not} ski tomorrow.
+    \end{enumerate}
+  \item I come to class whenever there is going to be a quiz
+    \begin{enumerate}
+    \item \textbf{Converse:} I come to class \textbf{only if} there will be a quiz.
+    \item \textbf{Contrapositive:} If I do \textbf{not} come to class, then there will \textbf{not} be a quiz.
+    \item \textbf{Inverse:} If there is \textbf{not} going to be a quiz, then I do \textbf{not} come to class
+    \end{enumerate}
+  \item A positive integer is a prime only if it has no divisors other than 1 and itself
+    \begin{enumerate}
+    \item \textbf{Converse:} A positive integer is a prime \textbf{only if} it has no divisors other than 1 and itself
+    \item \textbf{Contrapositive:} If a positive integer has a divisor other than 1 and itself, then it is not prime 
+    \item \textbf{Inverse:} If a positive integer is \textbf{not} prime, then it has a divisor other than 1 and itself 
+    \end{enumerate}
+  \end{enumerate}
+  
+\end{enumerate}
+
+\section*{{\color{BurntOrange}Question 29}}
+%------------------------------------------------
+
+\begin{enumerate}
+  \setcounter{enumi}{28}
+\item How many rows appear in a truth table for each of these compound propositions? \\
+  There we can take advantage of what we leart in the past module by the product rule $2^{n}$
+  \begin{enumerate}
+  \item $p \implies \neg p$\\
+    $\boldsymbol{2^{1}=2}$
+  \item $(p \lor \neg{r}) \land (q \lor \neg{s})$\\
+    $\boldsymbol{2^{4}=16}$
+  \item $q \lor p \lor \neg{s} \neg{r} \lor \neg{t} \lor u$\\
+    $\boldsymbol{2^{6}=64}$
+  \item $(p \land r \land t) \iff (q \land t)$\\
+    $\boldsymbol{2^{4}=16}$
+  \end{enumerate}
+  
+\end{enumerate}
+
+\section*{{\color{CadetBlue}Question 35}}
+%------------------------------------------------
+
+\begin{enumerate}
+  \setcounter{enumi}{34}
+\item Construct a truth table for each of these compound propositions
+  \begin{enumerate}
+  \item
+    \begin{tabular}{M M|M|M M}
+        \hline
+        p & q & \neg q & (p \rightarrow \neg q) \\ \hline
+        0 & 0 & 1 & 1 \\ 
+        0 & 1 & 0 & 1 \\
+        1 & 0 & 1 & 1 \\  
+        1 & 1 & 0 & 0 \\ 
+        \hline
+    \end{tabular}
+      
+  \item
+    \begin{tabular}{M M|M|M M}
+        \hline
+        p & q & \neg p & (\neg p \leftrightarrow q) \\ \hline
+        0 & 0 & 1 & 0 \\ 
+        0 & 1 & 1 & 1 \\
+        1 & 0 & 0 & 1 \\  
+        1 & 1 & 0 & 0 \\ 
+        \hline
+    \end{tabular}
+          
+  \item
+    \begin{tabular}{M M|M|M |M |M}
+        \hline
+        p & q & \neg p & (p \rightarrow q) & (\neg p \rightarrow q) &(p \rightarrow q) \lor (\neg p \rightarrow q) \\ \hline
+        0 & 0 & 1 & 1 & 0 & 1 \\ 
+        0 & 1 & 1 & 1 & 1 & 1 \\
+        1 & 0 & 0 & 0 & 1 & 1 \\  
+        1 & 1 & 0 & 1 & 1 & 1 \\ 
+        \hline
+    \end{tabular}
+  \item 
+    \begin{tabular}{M M|M|M|M|M}
+        \hline
+        p & q & \neg p & (p \rightarrow q) & (\neg p \rightarrow q) & (p \rightarrow q) \land (\neg p \rightarrow q) \\ \hline
+        0 & 0 & 1 & 1 & 0 & 0 \\ 
+        0 & 1 & 1 & 1 & 1 & 1 \\
+        1 & 0 & 0 & 0 & 1 & 0 \\  
+        1 & 1 & 0 & 1 & 1 & 1 \\ 
+        \hline
+    \end{tabular}
+  \item 
+    \begin{tabular}{M M|M|M|M|M}
+        \hline
+        p & q & \neg p & (p \leftrightarrow q) & (\neg p \leftrightarrow q) & (p \leftrightarrow q) \lor (\neg p \leftrightarrow q) \\ \hline
+        0 & 0 & 1 & 1 & 0 & 1 \\ 
+        0 & 1 & 1 & 0 & 1 & 1 \\
+        1 & 0 & 0 & 0 & 1 & 1 \\  
+        1 & 1 & 0 & 1 & 0 & 1 \\ 
+        \hline
+    \end{tabular}
+  \item 
+    \begin{tabular}{M M|M|M|M|M|M}
+        \hline
+        p & q & \neg p & \neg q & (\neg p \leftrightarrow \neg q) & (p \leftrightarrow q) & (\neg p \leftrightarrow \neg q)\leftrightarrow (p \leftrightarrow q)  \\ \hline
+        0 & 0 & 1 & 1 & 1 & 1 & 1 \\ 
+        0 & 1 & 1 & 0 & 0 & 0 & 1 \\
+        1 & 0 & 0 & 1 & 0 & 0 & 1 \\  
+        1 & 1 & 0 & 0 & 1 & 1 & 1 \\ 
+        \hline
+    \end{tabular}
+  \end{enumerate}
+\end{enumerate}
+
+\newpage
+{\color{teal}
+\dotfill
+Section 1.3
+\dotfill
+}
+
+\section*{{\color{CornflowerBlue}Question 7}}
+
+\begin{enumerate}
+  \setcounter{enumi}{6}
+\item Use De Morgan's laws to find the negation of each of the following statements.
+  \begin{enumerate}
+  \item Jan is rich and happy\\
+    \textbf{Jan is not rich or Jan is not happy}
+  \item Carlos will bicycle or run tomorrow\\
+    \textbf{Carlos will not bicycle, and Carlos will not run tomorrow}
+  \item Mei walks or takes the bus to class\\
+    \textbf{Mei does not walks, and Mei does not takes the bus to class}
+  \item Ibrahim is smart and hard working\\
+    \textbf{Ibrahim is not smart or Ibrahim is not hard working}
+  \end{enumerate}
+  
+\end{enumerate}
+
+\section*{{\color{OliveGreen}Question 9}}
+
+\begin{enumerate}
+  \setcounter{enumi}{8}
+\item Show that each of these conditional statements is a tautology by using truth tables.
+  \begin{enumerate}
+  \item
+    \begin{tabular}{M M|M|M}
+        \hline
+        p & q & (p \land q) & (p \land q) \rightarrow p\\ \hline
+        0 & 0 & 0 & 1\\ 
+        0 & 1 & 0 & 1\\
+        1 & 0 & 0 & 1\\
+        1 & 1 & 1 & 1\\
+        \hline
+    \end{tabular}
+  \item 
+    \begin{tabular}{M M|M|M}
+        \hline
+        p & q & (p \lor q) & p \implies (p \lor q)\\ \hline 
+        0 & 0 & 0 & 1 \\ 
+        0 & 1 & 1 & 1 \\
+        1 & 0 & 1 & 1 \\
+        1 & 1 & 1 & 1 \\
+        \hline
+    \end{tabular}
+  \item
+    \begin{tabular}{M M|M|M|M}
+        \hline
+        p & q & \neg p & (p \implies q) & (\neg p \implies (p \implies q) \\ \hline
+        0 & 0 & 1 & 1 & 1 \\ 
+        0 & 1 & 1 & 1 & 1 \\
+        1 & 0 & 0 & 0 & 1 \\  
+        1 & 1 & 0 & 1 & 1 \\ 
+        \hline
+    \end{tabular}
+  \item
+    \begin{tabular}{M M|M|M|M}
+        \hline
+        p & q & p \land q & p \implies q & (p \land q) \implies (p \implies q)\\ \hline
+        0 & 0 & 0 & 1 & 1 \\ 
+        0 & 1 & 0 & 1 & 1 \\
+        1 & 0 & 0 & 0 & 1 \\  
+        1 & 1 & 1 & 1 & 1 \\ 
+        \hline
+    \end{tabular}
+    \newpage
+  \item We can find the equivalence of the expresion \\
+    **remembering that \\$\neg(p \implies q) \equiv \neg ( \neg p \lor q ) \equiv (p \land \neg q)$\\
+    
+    \begin{tabular}{M M|M|M|M|M}
+        \hline
+        p & q & \neg q & p \land \neg q & p & \neg(p \implies q) \implies p \\ \hline
+        0 & 0 & 1 & 0 & 0 & 1\\ 
+        0 & 1 & 0 & 0 & 0 & 1\\
+        1 & 0 & 1 & 1 & 1 & 1\\
+        1 & 1 & 0 & 0 & 1 & 1\\
+        \hline
+    \end{tabular}
+  \item $\neg (p \implies q) \implies \neg q$ \\
+    Using De Morgans Law $\neg (p \implies q) \equiv p \land \neg q$ \\
+    
+    \begin{tabular}{M M|M|M|M|M}
+        \hline
+        p & q & \neg q & p \land \neg q & \neg q & \neg(p \implies q) \implies \neg q \\ \hline
+        0 & 0 & 1 & 0 & 1 & 1 \\ 
+        0 & 1 & 0 & 0 & 0 & 1 \\
+        1 & 0 & 1 & 1 & 1 & 1 \\  
+        1 & 1 & 0 & 0 & 0 & 1 \\ 
+        \hline
+    \end{tabular}
+  \end{enumerate}
+\end{enumerate}
+
+\section*{{\color{Dandelion}Question 11}}
+\begin{enumerate}
+  \setcounter{enumi}{10}
+\item Show that each conditional statement in Question 9 is a tautology without using truth tables.
+  \begin{enumerate}
+  \item $(p \land q) \implies p$ \\
+    It has an "and" connection, that give us some information, to make the condition happens p and q must be \textbf{True}. If that happens p is also \textbf{True}. In other hand also works when both p and q are False by the implication table of truth that tell us if p and q does not happens the conditional is \textbf{True}.
+  \item $p \implies (p \lor q)$ \\
+    The p variable has the main function because in the part of $p \lor  q$ for every positive value is \textbf{True} and the conditional give us the reason, in the other hand if it is False, by the conditional table of truth $False \implies False$ give us \textbf{True}
+  \item $\neg p \implies (p \implies q)$ \\
+    Evaluatin p as True in the conditional statement give us $False \implies (True \implies Maybe False )$, what le us think in the conditional table of truth $False \implies False$ is True in the other hand evaluating p as False. $True \implies True$ that is True and we can certantly say that is a \textbf{tautology} 
+  \item $(p \land q) \implies (p \implies q)$ \\
+    Taking $p \land q$ as a positive value $True \implies True$ give us as result \textbf{True}, because the conditional $True \implies Maybe_True_or_False$ give us \textbf{True}
+  \item $\neg(p \implies q) \implies p$ \\
+    The possibilities to give us \textbf{True} are when $\neg(p \implies q)$ is \textbf{False} and p is \textbf{True}, in the other hand when $\neg(p \implies q)$ is \textbf{True}, p should be also \textbf{True}
+
+  \item $\neg (p \implies q) \implies \neg q$ \\
+    Evaluating the expresion $\neg(p \implies q)$ as \textbf{True} and $\neg q$ as True .. to the condition works, and in the other hand if $\neg(p \implies q)$ as False, but the negation of False is \textbf{True} the condition works.
+    
+  \end{enumerate}
+  
+\end{enumerate}
+
+\section*{{\color{DarkOrchid}Question 15}}
+
+\begin{enumerate}
+  \setcounter{enumi}{14}
+\item Determine whether $(\neg q \land (p \implies q)) \implies \neg p$ is a tautology
+  Making the truth table to know it\\
+
+  \begin{tabular}{M M|M|M|M|M|M|M}
+    \hline
+    p & q & \neg p & \neg q & p \implies q & \neg q \land (p \implies q) & \neg p & (\neg q \land (p \implies q)) \implies \neg p\\ \hline
+    0 & 0 & 1 & 1 & 1 & 1 & 1 & \color{red}1 \\ 
+    0 & 1 & 1 & 0 & 1 & 0 & 1 & \color{red}1 \\ 
+    1 & 0 & 0 & 1 & 0 & 0 & 0 & \color{red}1 \\ 
+    1 & 1 & 0 & 0 & 1 & 0 & 0 & \color{red}1 \\ 
+    \hline
+  \end{tabular}
+  
+\end{enumerate}
+
+
+\section*{{\color{Emerald}Question 17}}
+
+\begin{enumerate}
+  \setcounter{enumi}{16}
+\item Show that $\neg (p \iff q)$ and $p \iff \neg q$ are logically equivalent.
+  
+  \begin{tabular}{M M|M|M|M|M|M|M}
+    \hline
+    p & q & \neg q & \neg p & p \iff \neg{q} & \neg{p} \land \neg{q} & p \lor q & \neg(p \iff q)\\ \hline
+    0 & 0 & 1 & 1 & \color{red}0  & 1 & 0 & \color{red}0 \\ 
+    0 & 1 & 0 & 1 & \color{red}1  & 1 & 1 & \color{red}1 \\ 
+    1 & 0 & 1 & 0 & \color{red}1  & 1 & 1 & \color{red}1 \\ 
+    1 & 1 & 0 & 0 & \color{red}0  & 0 & 1 & \color{red}0 \\ 
+    \hline
+  \end{tabular}
+  
+\end{enumerate}
+
+\section*{{\color{Fuchsia}Question 31}}
+
+\begin{enumerate}
+  \setcounter{enumi}{30}
+\item Show that $(p \implies q) \implies r$ and $p \implies (q \implies r)$ are not logically equivalent.
+
+  \begin{tabular}{M M M|M|M|M|M|M|M}
+    \hline
+    p & q & r & p \implies q & r & (p \implies q) \implies r & (p \implies r) & q \implies r & (p \implies r) \land (q \implies r)\\ \hline
+    0 & 0 & 0 & 1 & 0 & \color{red}0  & 1 & 1 & \color{red}1 \\ 
+    0 & 0 & 1 & 1 & 1 & \color{red}1  & 1 & 1 & \color{red}1 \\ 
+    0 & 1 & 0 & 1 & 0 & \color{red}0  & 1 & 0 & \color{red}0 \\ 
+    0 & 1 & 1 & 1 & 1 & \color{red}1  & 1 & 1 & \color{red}1 \\ 
+    1 & 0 & 0 & 0 & 0 & \color{red}1  & 0 & 1 & \color{red}0 \\ 
+    1 & 0 & 1 & 0 & 1 & \color{red}1  & 1 & 0 & \color{red}0 \\ 
+    1 & 1 & 0 & 1 & 0 & \color{red}0  & 0 & 0 & \color{red}0 \\ 
+    1 & 1 & 1 & 1 & 1 & \color{red}1  & 1 & 1 & \color{red}1 \\ 
+    \hline
+  \end{tabular}
+
+  
+\end{enumerate}
+
+\section*{{\color{JungleGreen}Question 35}}
+
+\begin{enumerate}
+  \setcounter{enumi}{34}
+\item Find the dual of each of these compound propositions.\\
+  A proposition is said to be dual if and only if it is dual is equivalent to the given function. \\
+  Chnaging the and for or, and vice-versa. A constant 1 (or true) of a given function is changed to a constant 0 (or false) and vice-versa
+  \begin{enumerate}
+  \item $p \land \neg q \land \neg r$ DUAL: 
+    $\boldsymbol{p \lor \neg q \lor \neg r}$
+  \item $(p \land q \land r) \lor s$ DUAL: 
+    $\boldsymbol{(p \lor  q \lor  r) \land s }$
+  \item $(p \lor F) \land (q \lor T)$ DUAL: 
+    $\boldsymbol{(p \land T) \lor (q \land F )}$
+  \end{enumerate}
+\end{enumerate}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
