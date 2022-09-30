@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.7)  30 SEP 2022 16:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.7)  30 SEP 2022 17:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -581,11 +581,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 122--126
 
  []
 
-<images/problema_10.png, id=41, 436.63126pt x 216.81pt>
+<images/problema_10.png, id=41, 438.63875pt x 230.8625pt>
 File: images/problema_10.png Graphic file (type png)
 <use images/problema_10.png>
 Package pdftex.def Info: images/problema_10.png  used on input line 132.
-(pdftex.def)             Requested size: 436.63019pt x 216.80946pt.
+(pdftex.def)             Requested size: 438.63766pt x 230.86192pt.
 
 Overfull \hbox (1.13162pt too wide) in paragraph at lines 127--133
 \OML/zplm/m/it/12 L \U/MnSymbolD/m/n/12 ^^@$ \T1/ppl/m/n/12 lenguaje de las ca-
@@ -649,7 +649,7 @@ texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb></usr/local/texlive/2022/texmf
 -dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2022/texmf-dist/f
 onts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/ty
 pe1/urw/palatino/uplri8a.pfb>
-Output written on luisballado_assignment01.pdf (7 pages, 249930 bytes).
+Output written on luisballado_assignment01.pdf (7 pages, 248119 bytes).
 PDF statistics:
  97 PDF objects out of 1000 (max. 8388607)
  45 compressed objects within 1 object stream
