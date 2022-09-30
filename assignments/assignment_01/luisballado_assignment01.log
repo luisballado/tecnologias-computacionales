@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.7)  30 SEP 2022 11:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.7)  30 SEP 2022 16:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -474,123 +474,185 @@ LaTeX Font Info:    Trying to load font information for OT1+zplm on input line
 (/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ot1zplm.fd
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 78--79
+<images/problema_1.png, id=1, 406.51875pt x 225.84375pt>
+File: images/problema_1.png Graphic file (type png)
+<use images/problema_1.png>
+Package pdftex.def Info: images/problema_1.png  used on input line 81.
+(pdftex.def)             Requested size: 406.51775pt x 225.84319pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 78--82
 
  []
 
+<images/problema_2.png, id=3, 439.6425pt x 151.56625pt>
+File: images/problema_2.png Graphic file (type png)
+<use images/problema_2.png>
+Package pdftex.def Info: images/problema_2.png  used on input line 86.
+(pdftex.def)             Requested size: 439.64142pt x 151.56587pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 80--81
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 82--83
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 84--85
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 86--87
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 88--89
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 90--91
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 91--92
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 92--93
-
- []
-
-
-Overfull \hbox (1.13162pt too wide) in paragraph at lines 93--96
-\OML/zplm/m/it/12 L \U/MnSymbolD/m/n/12 ^^@$ \T1/ppl/m/n/12 lenguaje de las ca-
-de-nas con un número par/im-par de aes y/o un número
- []
-
-<images/graph1.png, id=1, 453.695pt x 171.64125pt>
-File: images/graph1.png Graphic file (type png)
-<use images/graph1.png>
-Package pdftex.def Info: images/graph1.png  used on input line 109.
-(pdftex.def)             Requested size: 455.24411pt x 172.22746pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 106--110
+Underfull \hbox (badness 10000) in paragraph at lines 83--87
 
  []
 
 [1
 
-{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-<images/graph2.png, id=16, 456.70625pt x 122.4575pt>
-File: images/graph2.png Graphic file (type png)
-<use images/graph2.png>
-Package pdftex.def Info: images/graph2.png  used on input line 114.
-(pdftex.def)             Requested size: 455.24411pt x 122.06851pt.
+{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./image
+s/problema_1.png> <./images/problema_2.png>]
+<images/problema_3.png, id=17, 398.48875pt x 144.54pt>
+File: images/problema_3.png Graphic file (type png)
+<use images/problema_3.png>
+Package pdftex.def Info: images/problema_3.png  used on input line 92.
+(pdftex.def)             Requested size: 398.48778pt x 144.53963pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--93
+
+ []
+
+<images/problema_4.png, id=18, 559.08875pt x 292.09125pt>
+File: images/problema_4.png Graphic file (type png)
+<use images/problema_4.png>
+Package pdftex.def Info: images/problema_4.png  used on input line 97.
+(pdftex.def)             Requested size: 559.08737pt x 292.09052pt.
+
+Overfull \hbox (103.84326pt too wide) in paragraph at lines 97--98
+ [][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 94--98
+
+ []
+
+[2 <./images/problema_3.png> <./images/problema_4.png>]
+<images/problema_5.png, id=26, 331.2375pt x 173.64874pt>
+File: images/problema_5.png Graphic file (type png)
+<use images/problema_5.png>
+Package pdftex.def Info: images/problema_5.png  used on input line 103.
+(pdftex.def)             Requested size: 331.23668pt x 173.64832pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 100--104
+
+ []
+
+<images/problema_6.png, id=27, 462.72874pt x 225.84375pt>
+File: images/problema_6.png Graphic file (type png)
+<use images/problema_6.png>
+Package pdftex.def Info: images/problema_6.png  used on input line 108.
+(pdftex.def)             Requested size: 462.72762pt x 225.84319pt.
+
+Overfull \hbox (7.4835pt too wide) in paragraph at lines 108--109
+ [][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 105--109
+
+ []
+
+[3 <./images/problema_5.png> <./images/problema_6.png>]
+<images/problema_7.png, id=33, 366.36874pt x 172.645pt>
+File: images/problema_7.png Graphic file (type png)
+<use images/problema_7.png>
+Package pdftex.def Info: images/problema_7.png  used on input line 114.
+(pdftex.def)             Requested size: 366.36784pt x 172.64456pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 111--115
 
  []
 
-<images/graph3.png, id=17, 431.6125pt x 229.85875pt>
-File: images/graph3.png Graphic file (type png)
-<use images/graph3.png>
-Package pdftex.def Info: images/graph3.png  used on input line 119.
-(pdftex.def)             Requested size: 455.24411pt x 242.45308pt.
+<images/problema_8.png, id=34, 328.22626pt x 333.245pt>
+File: images/problema_8.png Graphic file (type png)
+<use images/problema_8.png>
+Package pdftex.def Info: images/problema_8.png  used on input line 119.
+(pdftex.def)             Requested size: 328.22545pt x 333.24417pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 116--120
 
  []
 
-<images/graph4.png, id=18, 392.46625pt x 123.46124pt>
-File: images/graph4.png Graphic file (type png)
-<use images/graph4.png>
-Package pdftex.def Info: images/graph4.png  used on input line 124.
-(pdftex.def)             Requested size: 455.24411pt x 143.21889pt.
+[4 <./images/problema_7.png> <./images/problema_8.png>]
+<images/problema_9.png, id=40, 429.605pt x 122.4575pt>
+File: images/problema_9.png Graphic file (type png)
+<use images/problema_9.png>
+Package pdftex.def Info: images/problema_9.png  used on input line 125.
+(pdftex.def)             Requested size: 429.60394pt x 122.45718pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 121--125
+Underfull \hbox (badness 10000) in paragraph at lines 122--126
 
  []
 
-[2 <./images/graph1.png> <./images/graph2.png> <./images/graph3.png>] [3 <./ima
-ges/graph4.png>] (./luisballado_assignment01.aux) ) 
+<images/problema_10.png, id=41, 436.63126pt x 216.81pt>
+File: images/problema_10.png Graphic file (type png)
+<use images/problema_10.png>
+Package pdftex.def Info: images/problema_10.png  used on input line 132.
+(pdftex.def)             Requested size: 436.63019pt x 216.80946pt.
+
+Overfull \hbox (1.13162pt too wide) in paragraph at lines 127--133
+\OML/zplm/m/it/12 L \U/MnSymbolD/m/n/12 ^^@$ \T1/ppl/m/n/12 lenguaje de las ca-
+de-nas con un número par/im-par de aes y/o un número
+ []
+
+[5 <./images/problema_9.png> <./images/problema_10.png>]
+<images/graph1.png, id=47, 453.695pt x 171.64125pt>
+File: images/graph1.png Graphic file (type png)
+<use images/graph1.png>
+Package pdftex.def Info: images/graph1.png  used on input line 146.
+(pdftex.def)             Requested size: 455.24411pt x 172.22746pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 143--147
+
+ []
+
+<images/graph2.png, id=48, 456.70625pt x 122.4575pt>
+File: images/graph2.png Graphic file (type png)
+<use images/graph2.png>
+Package pdftex.def Info: images/graph2.png  used on input line 151.
+(pdftex.def)             Requested size: 455.24411pt x 122.06851pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 148--152
+
+ []
+
+[6 <./images/graph1.png> <./images/graph2.png>]
+<images/graph3.png, id=54, 431.6125pt x 229.85875pt>
+File: images/graph3.png Graphic file (type png)
+<use images/graph3.png>
+Package pdftex.def Info: images/graph3.png  used on input line 157.
+(pdftex.def)             Requested size: 455.24411pt x 242.45308pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 154--158
+
+ []
+
+<images/graph4.png, id=55, 392.46625pt x 123.46124pt>
+File: images/graph4.png Graphic file (type png)
+<use images/graph4.png>
+Package pdftex.def Info: images/graph4.png  used on input line 162.
+(pdftex.def)             Requested size: 455.24411pt x 143.21889pt.
+[7 <./images/graph3.png> <./images/graph4.png>] (./luisballado_assignment01.aux
+) ) 
 Here is how much of TeX's memory you used:
- 8761 strings out of 478268
- 125420 string characters out of 5846348
- 400417 words of memory out of 5000000
- 26839 multiletter control sequences out of 15000+600000
+ 8831 strings out of 478268
+ 127137 string characters out of 5846348
+ 394417 words of memory out of 5000000
+ 26899 multiletter control sequences out of 15000+600000
  494718 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 70i,11n,76p,290b,444s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{/usr/local/texlive/2022/tex
-mf-dist/fonts/enc/dvips/mnsymbol/MnSymbolC.enc}{/usr/local/texlive/2022/texmf-d
-ist/fonts/enc/dvips/mnsymbol/MnSymbolE.enc}{/usr/local/texlive/2022/texmf-dist/
-fonts/enc/dvips/mnsymbol/MnSymbolD.enc}{/usr/local/texlive/2022/texmf-dist/font
-s/enc/dvips/base/8r.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/
-mnsymbol/MnSymbol12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/
-mnsymbol/MnSymbol9.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/m
-athpazo/fplmr.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/palatino/
-uplb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/palatino/uplr8a.
-pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on luisballado_assignment01.pdf (3 pages, 124617 bytes).
+ 70i,11n,76p,290b,438s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolC.enc}{
+/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolE.enc}{/usr
+/local/texlive/2022/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolD.enc}{/usr/loc
+al/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2022
+/texmf-dist/fonts/type1/public/mnsymbol/MnSymbol12.pfb></usr/local/texlive/2022
+/texmf-dist/fonts/type1/public/mnsymbol/MnSymbol9.pfb></usr/local/texlive/2022/
+texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb></usr/local/texlive/2022/texmf
+-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2022/texmf-dist/f
+onts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/ty
+pe1/urw/palatino/uplri8a.pfb>
+Output written on luisballado_assignment01.pdf (7 pages, 249930 bytes).
 PDF statistics:
- 63 PDF objects out of 1000 (max. 8388607)
- 35 compressed objects within 1 object stream
+ 97 PDF objects out of 1000 (max. 8388607)
+ 45 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 71 words of extra memory for PDF output out of 10000 (max. 10000000)
 

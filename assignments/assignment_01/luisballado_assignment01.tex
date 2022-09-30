@@ -76,49 +76,87 @@
 \item Diseñar autómatas finitos deterministas que acepten los siguientes lenguajes:
   \begin{enumerate}[(i)]
   \item $\Sigma = \left\lbrace0,1\right\rbrace$ , $L= $ lenguaje de las cadenas sobre $\Sigma$ de longitud impar.\\
-    
+    \begin{figure}[H]
+      \centering
+      \includegraphics{images/problema_1.png}
+    \end{figure}
   \item $\Sigma = \left\lbrace 0,1 \right\rbrace$ , $L= $ lenguaje de las cadenas sobre $\Sigma$ que contienen un número impar de unos.\\
-    
+    \begin{figure}[H]
+      \centering
+      \includegraphics{images/problema_2.png}
+    \end{figure}
+    \newpage
   \item $\Sigma = \left\lbrace a,b \right\rbrace$ , $L= ab^{+}$ \\
-    
+    \begin{figure}[H]
+      \centering
+      \includegraphics{images/problema_3.png}
+    \end{figure}
   \item $\Sigma = \left\lbrace a,b \right\rbrace$ , $L= ab^{*} \cup ab^{*}a$ \\
-    
+    \begin{figure}[H]
+      \centering
+      \includegraphics{images/problema_4.png}
+    \end{figure}
+    \newpage
   \item $\Sigma = \left\lbrace 0,1 \right\rbrace$ , $L= \left(0 \cup 10\right)^{*} $ \\
-    
+    \begin{figure}[H]
+      \centering
+      \includegraphics{images/problema_5.png}
+    \end{figure}
   \item $\Sigma = \left\lbrace 0,1 \right\rbrace$ , $L= \left(01 \cup 10\right).^{*}$ \\
-
+    \begin{figure}[H]
+      \centering
+      \includegraphics{images/problema_6.png}
+    \end{figure}
+    \newpage
   \item $\Sigma = \left\lbrace 0,1 \right\rbrace$ , Lenguaje de todas las cadenas que no contienen dos unos consecutivos. \\
+    \begin{figure}[H]
+      \centering
+      \includegraphics{images/problema_7.png}
+    \end{figure}
   \item $\Sigma = \left\lbrace a,b \right\rbrace$ , $L= \left\lbrace a^{2i} b^{3j} : i,j \geq 0 \right\rbrace$ \\
+    \begin{figure}[H]
+      \centering
+      \includegraphics{images/problema_8.png}
+    \end{figure}
+    \newpage
   \item $\Sigma = \left\lbrace a,b \right\rbrace$ , $L= $ lenguaje de las cadenas sobre $\Sigma$ que contienen un número par de $aes$ y un número par de bes. Ayuda: utilizar 4 estados.\\
+    \begin{figure}[H]
+      \centering
+      \includegraphics{images/problema_9.png}
+    \end{figure}
   \item $\Sigma = \left\lbrace a,b \right\rbrace$ . Para cada combinación de las condiciones "par" e "impar" y de las conectivas "o" e "y", diseñar un AFD que acepte el lenguaje $L$ definido por\\
     $L= $ lenguaje de las cadenas con un número par/impar de aes y/o un número par/impar de bes.\\
     Ayuda: utilizar el autómata de 4 estados diseñado en el ejercicio anterior, modificado adecuadamente el conjunto de estados finales.
+    \begin{figure}[H]
+      \centering
+      \includegraphics{images/problema_10.png}
+    \end{figure}
   \end{enumerate}
 \end{enumerate}
 
 %------------------------------------------------
-
-
+\newpage
 \begin{enumerate}
   \setcounter{enumi}{1}
 \item Determinar los lenguajes aceptados por los siguientes AFD. Describir los lenguajes ya sea por medio de una propiedad característica o de una expresión regular.
   \begin{enumerate}[i]
-  \item uno\\
+  \item Regular Expresion $\left(0^{*}1^{*}\right)^{*} \neq ([0-1]\left\lbrace 4, \right\rbrace)$\\
     \begin{figure}[H]
       \centering
       \includegraphics[width=\linewidth]{images/graph1.png}
     \end{figure}
-  \item dos\\
+  \item Regular Expresion $\left(10\right)\cup\left(10\right)^{*}$\\
     \begin{figure}[H]
       \centering
       \includegraphics[width=\linewidth]{images/graph2.png}
     \end{figure}
-  \item tres\\
+    \newpage
+  \item $(01)^{*}(10^{*}11)^{*}$\\
     \begin{figure}[H]
       \centering
       \includegraphics[width=\linewidth]{images/graph3.png}
     \end{figure}
-  \item cuatro\\
+  \item $(bb^{*}aa^{*})^{*}$
     \begin{figure}[H]
       \centering
       \includegraphics[width=\linewidth]{images/graph4.png}
