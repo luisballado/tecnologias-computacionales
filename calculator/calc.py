@@ -1,5 +1,8 @@
 import math
 
+#leer https://ply.readthedocs.io/en/latest/ply.html#lex-example
+#leer https://ericknavarro.io/2020/02/10/24-Mi-primer-proyecto-utilizando-PLY/
+
 # -----------------------------------------------------------------------------
 # calc.py
 #
@@ -8,7 +11,7 @@ import math
 
 #token list
 tokens = (
-    'NAME','NUMBER','DOUBLE',
+    'NAME','NUMBER','DOUBLE','SEN',
     'PLUS','MINUS','TIMES','DIVIDE','EQUALS',
     'LPAREN','RPAREN','POW',
     )
@@ -24,7 +27,7 @@ t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
 t_NAME    = r'[a-zA-Z_][a-zA-Z0-9_]*'
 t_POW     = r'\^'
-
+t_SEN     = r'seno\(\d+\)'
 ####################################################################
 #Funciones de análisis léxico
 ####################################################################
@@ -65,7 +68,7 @@ lexer = lex.lex()
 # Parsing rules
 
 precedence = ( ('left','PLUS','MINUS'),
-               ('left','POW','TIMES','DIVIDE'),
+               ('left','POW','TIMES','DIVIDE','SEN'),
                ('right','UMINUS'),
             )
 
@@ -88,15 +91,25 @@ def p_statement_expr(t):
 def p_expression_binop(t):
     '''expression : expression PLUS expression
                   | expression MINUS expression
-                  | expression POW expression
                   | expression TIMES expression
                   | expression DIVIDE expression'''
     print('EXPRESSION')
     if t[2] == '+'  : t[0] = t[1] + t[3]
     elif t[2] == '-': t[0] = t[1] - t[3]
-    elif t[2] == '^': t[0] = pow(t[1],t[3])
     elif t[2] == '*': t[0] = t[1] * t[3]
     elif t[2] == '/': t[0] = t[1] / t[3]
+
+def p_expression_pow(t):
+    'expression : expression POW expression'
+    t[0] = pow(t[1],t[3])
+
+def p_expression_sen(t):
+    'expression : SEN LPAREN expression RPAREN'
+    print(t[0])
+    print(t[1])
+    print(t[2])
+    print(t[3])
+    t[0] = math.sin(t[2])
     
 def p_expression_uminus(t):
     'expression : MINUS expression %prec UMINUS'
