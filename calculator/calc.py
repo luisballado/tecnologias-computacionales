@@ -1,3 +1,4 @@
+import math
 
 # -----------------------------------------------------------------------------
 # calc.py
@@ -5,12 +6,14 @@
 # A simple calculator with variables -- all in one file.
 # -----------------------------------------------------------------------------
 
+#token list
 tokens = (
-    'NAME','NUMBER',
+    'NAME','NUMBER','DOUBLE',
     'PLUS','MINUS','TIMES','DIVIDE','EQUALS',
-    'LPAREN','RPAREN',
+    'LPAREN','RPAREN','POW',
     )
 
+# Specification of tokens
 # Tokens
 t_PLUS    = r'\+'
 t_MINUS   = r'-'
@@ -20,10 +23,21 @@ t_EQUALS  = r'='
 t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
 t_NAME    = r'[a-zA-Z_][a-zA-Z0-9_]*'
+t_POW     = r'\^'
 
 ####################################################################
 #Funciones de análisis léxico
 ####################################################################
+    
+def t_DOUBLE(t):
+    r'\d+\.\d+'
+    try:
+        t.value = float(t.value)
+    except ValueError:
+        print("Double value too large %d", t.value)
+        t.value = 0
+    return t
+    
 def t_NUMBER(t):
     r'\d+'
     try:
@@ -51,7 +65,7 @@ lexer = lex.lex()
 # Parsing rules
 
 precedence = ( ('left','PLUS','MINUS'),
-               ('left','TIMES','DIVIDE'),
+               ('left','POW','TIMES','DIVIDE'),
                ('right','UMINUS'),
             )
 
@@ -63,36 +77,52 @@ precedence = ( ('left','PLUS','MINUS'),
 names = { }
 def p_statement_assign(t):
     'statement : NAME EQUALS expression'
+    print('ASSIGN')
     names[t[1]] = t[3]
 
 def p_statement_expr(t):
     'statement : expression'
+    print("statement_expr")
     print(t[1])
-
+    
 def p_expression_binop(t):
     '''expression : expression PLUS expression
                   | expression MINUS expression
+                  | expression POW expression
                   | expression TIMES expression
                   | expression DIVIDE expression'''
+    print('EXPRESSION')
     if t[2] == '+'  : t[0] = t[1] + t[3]
     elif t[2] == '-': t[0] = t[1] - t[3]
+    elif t[2] == '^': t[0] = pow(t[1],t[3])
     elif t[2] == '*': t[0] = t[1] * t[3]
     elif t[2] == '/': t[0] = t[1] / t[3]
-
+    
 def p_expression_uminus(t):
     'expression : MINUS expression %prec UMINUS'
-    t[0] = -t[2]
-
+    print('UMINUS')
+    print(t[1])
+    if t[1] == '-':
+        t[0] = -t[2]
+    else:
+        t[0] == math.sin(t[2])
+    
+    
 def p_expression_group(t):
     'expression : LPAREN expression RPAREN'
+    print('GROUP')
     t[0] = t[2]
-
+            
+        
 def p_expression_number(t):
-    'expression : NUMBER'
+    '''expression : NUMBER
+                  | DOUBLE'''
+    print('NUMBER')
     t[0] = t[1]
 
 def p_expression_name(t):
     'expression : NAME'
+    print('NAME')
     try:
         t[0] = names[t[1]]
     except LookupError:
