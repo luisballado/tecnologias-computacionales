@@ -32,6 +32,7 @@ t_RPAREN  = r'\)'
 t_NAME    = r'[a-zA-Z_][a-zA-Z0-9_]*'
 t_POW     = r'\^'
 t_MOD     = r'\%'
+
 t_SET     = r'\{([^]]+)\}'
 t_UNION   = r'∪'
 t_INTERSECTION = r'∩'
@@ -194,7 +195,7 @@ def p_expression_number(t):
 
 def p_expression_name(t):
     'expression : NAME'
-    #print('NAME')
+    print('NAME')
     try:
         t[0] = names[t[1]]
     except LookupError:
