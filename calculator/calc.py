@@ -11,9 +11,9 @@ import math
 
 #token list
 tokens = (
-    'NAME','NUMBER','DOUBLE','SEN',
+    'NAME','NUMBER','DOUBLE','FUNCTION',
     'PLUS','MINUS','TIMES','DIVIDE','EQUALS',
-    'LPAREN','RPAREN','POW',
+    'LPAREN','RPAREN','POW','MOD',
     )
 
 # Specification of tokens
@@ -27,11 +27,17 @@ t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
 t_NAME    = r'[a-zA-Z_][a-zA-Z0-9_]*'
 t_POW     = r'\^'
-t_SEN     = r'seno\(\d+\)'
+t_MOD     = r'\%'
+
 ####################################################################
 #Funciones de análisis léxico
 ####################################################################
-    
+#FUNCIONES TODAS
+def t_FUNCTION(t):
+    r'invsen|invcos|invtan|sen|cos|tan|log10|log2|sqrt|SQRT|nlog|ln'
+    return t
+
+#VALORES TIPO FLOTANTES
 def t_DOUBLE(t):
     r'\d+\.\d+'
     try:
@@ -40,7 +46,8 @@ def t_DOUBLE(t):
         print("Double value too large %d", t.value)
         t.value = 0
     return t
-    
+
+#VALORES TIPO ENTERO
 def t_NUMBER(t):
     r'\d+'
     try:
@@ -66,10 +73,10 @@ import ply.lex as lex
 lexer = lex.lex()
 
 # Parsing rules
-
 precedence = ( ('left','PLUS','MINUS'),
-               ('left','POW','TIMES','DIVIDE','SEN'),
-               ('right','UMINUS'),
+               ('left','TIMES','DIVIDE'),
+               ('right','UMINUS','FUNCTION'),
+               ('right','POW','MOD'),
             )
 
 
@@ -80,62 +87,93 @@ precedence = ( ('left','PLUS','MINUS'),
 names = { }
 def p_statement_assign(t):
     'statement : NAME EQUALS expression'
-    print('ASSIGN')
+    #print('ASSIGN')
     names[t[1]] = t[3]
 
 def p_statement_expr(t):
     'statement : expression'
-    print("statement_expr")
-    print(t[1])
+    #print("statement_expr")
+    #print(t[1])
     
 def p_expression_binop(t):
     '''expression : expression PLUS expression
                   | expression MINUS expression
                   | expression TIMES expression
                   | expression DIVIDE expression'''
-    print('EXPRESSION')
+    #print('EXPRESSION')
     if t[2] == '+'  : t[0] = t[1] + t[3]
     elif t[2] == '-': t[0] = t[1] - t[3]
     elif t[2] == '*': t[0] = t[1] * t[3]
     elif t[2] == '/': t[0] = t[1] / t[3]
-
+    
 def p_expression_pow(t):
     'expression : expression POW expression'
     t[0] = pow(t[1],t[3])
 
-def p_expression_sen(t):
-    'expression : SEN LPAREN expression RPAREN'
-    print(t[0])
-    print(t[1])
-    print(t[2])
-    print(t[3])
-    t[0] = math.sin(t[2])
+def p_expression_mod(t):
+    'expression : expression MOD expression'
+    t[0] = t[1] % t[3]
+
+def p_function(t):
+    'expression : FUNCTION LPAREN expression RPAREN'
+    #print('FUNCION')
     
+    if t[1] == 'sen':
+        t[0] = math.sin(t[3])
+        #print('SEN')
+    elif t[1] == 'cos':
+        t[0] = math.cos(t[3])
+        #print('COS')
+    elif t[1] == 'tan':
+        t[0] = math.tan(t[3])
+        #print('TAN')
+    elif t[1] == 'invtan':
+        t[0] = math.atan(t[3])
+        #print('INV TAN')
+    elif t[1] == 'invsen':
+        t[0] = math.asin(t[3])
+        #print('INV SEN')
+    elif t[1] == 'invcos':
+        t[0] = math.acos(t[3])
+        #print('INV COS')
+    elif t[1] == 'log10':
+        t[0] = math.log(t[3],10)
+        #print('LOG10')
+    elif t[1] == 'log2':
+        t[0] = math.log(t[3],2)
+        #print('LOG2')
+    elif t[1] == 'sqrt':
+        t[0] = math.sqrt(t[3])
+        #print('SQRT')
+    elif ((t[1] == 'ln') or (t[1] == 'nlog')):
+        t[0] = math.log(t[3])
+        #print('LOG NAT')
+    else:
+        #print('ALGO MAS')
+        
 def p_expression_uminus(t):
     'expression : MINUS expression %prec UMINUS'
-    print('UMINUS')
-    print(t[1])
-    if t[1] == '-':
-        t[0] = -t[2]
-    else:
-        t[0] == math.sin(t[2])
-    
+    t[0] = -t[2]
+
+def p_expression_negation(t):
+    'expression : NEGATION expression'
+    t[0] = not(t[2])
     
 def p_expression_group(t):
     'expression : LPAREN expression RPAREN'
-    print('GROUP')
+    #print('GROUP')
     t[0] = t[2]
             
         
 def p_expression_number(t):
     '''expression : NUMBER
                   | DOUBLE'''
-    print('NUMBER')
+    #print('NUMBER')
     t[0] = t[1]
 
 def p_expression_name(t):
     'expression : NAME'
-    print('NAME')
+    #print('NAME')
     try:
         t[0] = names[t[1]]
     except LookupError:
