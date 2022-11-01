@@ -15,34 +15,41 @@ import math
 
 #token list
 tokens = (
-    'NAME','NUMBER','DOUBLE','FUNCTION','UNION',
-    'PLUS','MINUS','TIMES','DIVIDE','EQUALS',
-    'LPAREN','RPAREN','POW','MOD','SET','INTERSECTION'
+    'NAME','NUMBER','DOUBLE',
+    'FUNCTION','PLUS','MINUS',
+    'TIMES','DIVIDE','EQUALS',
+    'LPAREN','RPAREN','POW','MOD',
+    'SET','INTERSECTION','UNION',
+    'DSIM','DIFF','VACIO','UNIVERSE'
     )
 
 # Specification of tokens
 # Tokens
-t_PLUS    = r'\+'
-t_MINUS   = r'-'
-t_TIMES   = r'\*'
-t_DIVIDE  = r'/'
-t_EQUALS  = r'='
-t_LPAREN  = r'\('
-t_RPAREN  = r'\)'
-t_NAME    = r'[a-zA-Z_][a-zA-Z0-9_]*'
-t_POW     = r'\^'
-t_MOD     = r'\%'
-
-t_SET     = r'\{([^]]+)\}'
-t_UNION   = r'∪'
+t_PLUS         = r'\+'
+t_MINUS        = r'-'
+t_TIMES        = r'\*'
+t_DIVIDE       = r'/'
+t_EQUALS       = r'='
+t_LPAREN       = r'\('
+t_RPAREN       = r'\)'
+t_NAME         = r'[a-zA-Z_][a-zA-Z0-9_]*'
+t_POW          = r'\^'
+t_MOD          = r'\%'
+t_SET          = r'\{([^]]*)\}'
+t_UNION        = r'∪'
 t_INTERSECTION = r'∩'
+t_DSIM         = r'ß'
+t_DIFF         = r'\\'
+#t_COMP         = r'[A-Z]\''
+t_VACIO        = r'ø'
+t_UNIVERSE     = r'µ'
 
 ####################################################################
 #Funciones de análisis léxico
 ####################################################################
 #FUNCIONES TODAS
 def t_FUNCTION(t):
-    r'invsen|invcos|invtan|sen|cos|tan|log10|log2|sqrt|SQRT|nlog|ln'
+    r'invsen|invcos|invtan|sen|cos|tan|log10|log2|sqrt|SQRT|nlog|ln|tanh|cosh|senh|asinh|acosh|atanh'
     return t
 
 #VALORES TIPO FLOTANTES
@@ -144,6 +151,18 @@ def p_function(t):
     elif t[1] == 'invcos':
         t[0] = math.acos(t[3])
         #print('INV COS')
+    elif t[1] == 'tanh':
+        t[0] = math.tanh(t[3])
+    elif t[1] == 'cosh':
+        t[0] = math.cosh(t[3])
+    elif t[1] == 'senh':
+        t[0] = math.senh(t[3])
+    elif t[1] == 'asinh':
+        t[0] = math.asinh(t[3])
+    elif t[1] == 'acosh':
+        t[0] = math.acosh(t[3])
+    elif t[1] == 'atanh':
+        t[0] = math.atanh(t[3])
     elif t[1] == 'log10':
         t[0] = math.log(t[3],10)
         #print('LOG10')
@@ -172,10 +191,14 @@ def p_expression_set(t):
     'expression : SET'
     t[0] = t[1]
     t[0] = set()
+    
     for s in t[1]:
         t[0].add(s)
-    
-    t[0].remove(',')
+
+    #No commas en sets de cardinalidad uno
+    if len(t[1])>3:
+        t[0].remove(',')
+
     t[0].remove('{')
     t[0].remove('}')
 
@@ -186,7 +209,32 @@ def p_expression_union(t):
 def p_expression_intersection(t):
     'expression : expression INTERSECTION expression'
     t[0] = t[1].intersection(t[3])
+
+def p_expression_dsim(t):
+    'expression : expression DSIM expression'
+    t[0] = t[1].symmetric_difference(t[3])
+
+def p_expression_diff(t):
+    'expression : expression DIFF expression'
+    t[0] = t[1].difference(t[3])
+
+'''
+def p_expression_comp(t):
+    'expression : expression COMP'
+    #Universe - set
+    print('HOLA')
+'''
+def p_expression_vacio(t):
+    'expression : VACIO'
+    #COMP t_VACIO t_UNIVERSE
+    print('HOLA')
+    t[0] = set()
     
+'''
+def p_expression_universe(t):
+    #COMP t_VACIO t_UNIVERSE
+    t[0] = set()
+'''
 def p_expression_number(t):
     '''expression : NUMBER
                   | DOUBLE'''
