@@ -11,9 +11,9 @@ import math
 
 #token list
 tokens = (
-    'NAME','NUMBER','DOUBLE','FUNCTION',
+    'NAME','NUMBER','DOUBLE','FUNCTION','COMMA','UNION',
     'PLUS','MINUS','TIMES','DIVIDE','EQUALS',
-    'LPAREN','RPAREN','POW','MOD',
+    'LPAREN','RPAREN','POW','MOD','LBRACKET','RBRACKET',
     )
 
 # Specification of tokens
@@ -28,6 +28,10 @@ t_RPAREN  = r'\)'
 t_NAME    = r'[a-zA-Z_][a-zA-Z0-9_]*'
 t_POW     = r'\^'
 t_MOD     = r'\%'
+t_LBRACKET= r'\{'
+t_RBRACKET= r'\}'
+t_COMMA   = r'\,'
+t_UNION   = r'-U-'
 
 ####################################################################
 #Funciones de análisis léxico
@@ -93,7 +97,7 @@ def p_statement_assign(t):
 def p_statement_expr(t):
     'statement : expression'
     #print("statement_expr")
-    #print(t[1])
+    print(t[1])
     
 def p_expression_binop(t):
     '''expression : expression PLUS expression
@@ -149,22 +153,23 @@ def p_function(t):
         t[0] = math.log(t[3])
         #print('LOG NAT')
     else:
-        #print('ALGO MAS')
+        print('ALGO MAS')
         
 def p_expression_uminus(t):
     'expression : MINUS expression %prec UMINUS'
     t[0] = -t[2]
 
-def p_expression_negation(t):
-    'expression : NEGATION expression'
-    t[0] = not(t[2])
+def p_expression_bracket(t):
+    'expression : LBRACKET expression COMMA expression RBRACKET'
+    print('BRACK')
+    t[0] = (t[2])
+    print(type(t[2]))
     
 def p_expression_group(t):
     'expression : LPAREN expression RPAREN'
     #print('GROUP')
     t[0] = t[2]
-            
-        
+
 def p_expression_number(t):
     '''expression : NUMBER
                   | DOUBLE'''
@@ -173,7 +178,7 @@ def p_expression_number(t):
 
 def p_expression_name(t):
     'expression : NAME'
-    #print('NAME')
+    print('NAME')
     try:
         t[0] = names[t[1]]
     except LookupError:
