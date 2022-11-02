@@ -113,8 +113,9 @@ def p_statement_assign(t):
     
 def p_statement_expr(t):
     'statement : expression'
-    #RESPUESTA DE UNA ASIGNACION
+    #print('RESPUESTA DE UNA ASIGNACION')
     print(t[1])
+    
     
 def p_expression_binop(t):
     '''expression : expression PLUS expression
@@ -182,7 +183,7 @@ def p_function(t):
         t[0] = math.log(t[3])
         #print('LOG NAT')
     else:
-        print('ALGO MAS')
+        print('FUNCION NO IMPLEMENTADA')
         
 def p_expression_uminus(t):
     'expression : MINUS expression %prec UMINUS'
@@ -195,9 +196,9 @@ def p_expression_group(t):
 
 def p_expression_set(t):
     'expression : SET'
-    print('SET')
+    #print('SET')
     #t[0] = t[1]
-    print(t[1])
+    #print(t[1])
     t[0] = set() #Existe algo en el set
     
     #verificar aqui si existe el UNIVERSAL
@@ -253,8 +254,8 @@ def p_expression_diff(t):
 
 def p_expression_comp(t):
     'expression : expression COMP'
-    #Universe - set
-    print('COMPLEMENTO')
+    #UNIVERSE - SET
+    #print('COMPLEMENTO')
     t[0] = names['UNI'] - t[1]
 
 def p_expression_vacio(t):
