@@ -42,7 +42,7 @@ t_DSIM         = r'ß'
 t_DIFF         = r'\\'
 #t_COMP         = r'[A-Z]\''
 t_VACIO        = r'ø'
-t_UNIVERSE     = r'µ'
+t_UNIVERSE     = r'-UNI-'
 
 ####################################################################
 #Funciones de análisis léxico
@@ -230,11 +230,11 @@ def p_expression_vacio(t):
     print('HOLA')
     t[0] = set()
     
-'''
 def p_expression_universe(t):
+    'expression : UNIVERSE'
     #COMP t_VACIO t_UNIVERSE
-    t[0] = set()
-'''
+    print('UNIVERSE')
+
 def p_expression_number(t):
     '''expression : NUMBER
                   | DOUBLE'''
