@@ -20,7 +20,7 @@ tokens = (
     'TIMES','DIVIDE','EQUALS',
     'LPAREN','RPAREN','POW','MOD',
     'SET','INTERSECTION','UNION',
-    'DSIM','DIFF','VACIO','UNIVERSE'
+    'DSIM','DIFF','VACIO','COMP'
     )
 
 # Specification of tokens
@@ -38,11 +38,10 @@ t_MOD          = r'\%'
 t_SET          = r'\{([^]]*)\}'
 t_UNION        = r'∪'
 t_INTERSECTION = r'∩'
-t_DSIM         = r'ß'
+t_DSIM         = r'\∂' #solo uno
 t_DIFF         = r'\\'
-#t_COMP         = r'[A-Z]\''
+t_COMP         = r'\''
 t_VACIO        = r'ø'
-t_UNIVERSE     = r'-UNI-'
 
 ####################################################################
 #Funciones de análisis léxico
@@ -89,7 +88,7 @@ lexer = lex.lex()
 
 # Parsing rules
 precedence = ( ('left','PLUS','MINUS'),
-               ('left','TIMES','DIVIDE'),
+               ('left','TIMES','DIVIDE','DSIM'),
                ('right','UMINUS','FUNCTION'),
                ('right','POW','MOD'),
             )
@@ -102,12 +101,19 @@ precedence = ( ('left','PLUS','MINUS'),
 names = { }
 def p_statement_assign(t):
     'statement : NAME EQUALS expression'
-    #print('ASSIGN')
+    print('ASIGNACION')
+    #EJEMPLO
+    #A=0
+    #t[1] -> A
+    #t[2] -> =
+    #t[3] -> 0
     names[t[1]] = t[3]
 
+        
+    
 def p_statement_expr(t):
     'statement : expression'
-    #print("statement_expr")
+    #RESPUESTA DE UNA ASIGNACION
     print(t[1])
     
 def p_expression_binop(t):
@@ -189,27 +195,54 @@ def p_expression_group(t):
 
 def p_expression_set(t):
     'expression : SET'
-    t[0] = t[1]
-    t[0] = set()
+    print('SET')
+    #t[0] = t[1]
+    print(t[1])
+    t[0] = set() #Existe algo en el set
     
+    #verificar aqui si existe el UNIVERSAL
+    #Agregar los elementos al UNIVERSAL
+    if 'UNI' not in names:
+        #print('NO HAY UNIVERSAL') crear el UNIVERSAL
+        names['UNI'] = set()
+        U = names['UNI']
+    else:
+        U = names['UNI']
+
+        #Si el set muto identificar para replicarlo en UNI
+        '''
+        if t[1] in names:
+            for s in t[3]:
+                names['UNI'].remove(s)
+        '''
+        
     for s in t[1]:
         t[0].add(s)
-
+        U.add(s)
+        
     #No commas en sets de cardinalidad uno
-    if len(t[1])>3:
+    if ',' in t[0]:
         t[0].remove(',')
-
+        U.remove(',')
     t[0].remove('{')
     t[0].remove('}')
-
+    U.remove('{')
+    U.remove('}')
+    
+    
 def p_expression_union(t):
     'expression : expression UNION expression'
     t[0] = t[1].union(t[3])
-
+    '''
+    for i in range(len(t)):
+        print(t[i])
+    '''
+    
 def p_expression_intersection(t):
     'expression : expression INTERSECTION expression'
     t[0] = t[1].intersection(t[3])
 
+#QUITA LO QUE CONTENGA EN DOS
 def p_expression_dsim(t):
     'expression : expression DSIM expression'
     t[0] = t[1].symmetric_difference(t[3])
@@ -218,22 +251,15 @@ def p_expression_diff(t):
     'expression : expression DIFF expression'
     t[0] = t[1].difference(t[3])
 
-'''
 def p_expression_comp(t):
     'expression : expression COMP'
     #Universe - set
-    print('HOLA')
-'''
+    print('COMPLEMENTO')
+    t[0] = names['UNI'] - t[1]
+
 def p_expression_vacio(t):
     'expression : VACIO'
-    #COMP t_VACIO t_UNIVERSE
-    print('HOLA')
     t[0] = set()
-    
-def p_expression_universe(t):
-    'expression : UNIVERSE'
-    #COMP t_VACIO t_UNIVERSE
-    print('UNIVERSE')
 
 def p_expression_number(t):
     '''expression : NUMBER
@@ -241,11 +267,26 @@ def p_expression_number(t):
     #print('NUMBER')
     t[0] = t[1]
 
+#IMPRIMIR LO QUE TENGA EN MEMORIA
 def p_expression_name(t):
     'expression : NAME'
     print('NAME')
     try:
+        #print('El t0 es')
+
+        #t es un objeto
+        
         t[0] = names[t[1]]
+                
+        #print('Es todo el dict')
+        #print(names)
+
+        #print('t[1]')
+        
+        #print(type(t[1]))
+        #print(t[0])
+        #print(type(names[t[1]]))
+                
     except LookupError:
         print("Undefined name '%s'" % t[1])
         t[0] = 0
