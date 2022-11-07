@@ -1,3 +1,4 @@
+
 import math
 
 #MODULARIDAD ALTA COHESION DEBIL ACOPLAMIENTO
@@ -38,7 +39,7 @@ t_MOD          = r'\%'
 t_SET          = r'\{([^]]*)\}'
 t_UNION        = r'∪'
 t_INTERSECTION = r'∩'
-t_DSIM         = r'\∂' #solo uno
+t_DSIM         = r'ß' #r'^[g]$' #solo uno
 t_DIFF         = r'\\'
 t_COMP         = r'\''
 t_VACIO        = r'ø'
@@ -246,6 +247,7 @@ def p_expression_intersection(t):
 #QUITA LO QUE CONTENGA EN DOS
 def p_expression_dsim(t):
     'expression : expression DSIM expression'
+    print('DSIM')
     t[0] = t[1].symmetric_difference(t[3])
 
 def p_expression_diff(t):
