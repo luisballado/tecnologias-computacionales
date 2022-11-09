@@ -1,3 +1,4 @@
+
 import math
 
 #####################################################################
@@ -54,7 +55,7 @@ t_MOD          = r'\%'
 t_SET          = r'\{([^]]*)\}'
 t_UNION        = r'U'
 t_INTERSECTION = r'∩'
-t_DSIM         = r'^g$' #solo uno
+t_DSIM         = r'ß' #r'^[g]$' #solo uno
 t_DIFF         = r'\\'
 t_COMP         = r'\''
 t_VACIO        = r'ø'
@@ -328,6 +329,7 @@ def p_expression_intersection(t):
 ####################################################################
 def p_expression_dsim(t):
     'expression : expression DSIM expression'
+    print('DSIM')
     t[0] = t[1].symmetric_difference(t[3])
 
 ####################################################################
