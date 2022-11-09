@@ -1,0 +1,250 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Cheatsheet
+% LaTeX Template
+% Version 1.0 (12/12/15)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Michael Müller (https://github.com/cmichi/latex-template-collection) with
+% extensive modifications by Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% The MIT License (see included LICENSE file)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt]{scrartcl} % 11pt font size
+
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+
+\usepackage[margin=0pt, landscape]{geometry} % Page margins and orientation
+
+\usepackage{graphicx} % Required for including images
+
+\usepackage{color} % Required for color customization
+\definecolor{mygray}{gray}{.75} % Custom color
+
+\usepackage{url} % Required for the \url command to easily display URLs
+
+\usepackage[ % This block contains information used to annotate the PDF
+colorlinks=false, 
+pdftitle={Cheatsheet}, 
+pdfauthor={John Smith}, 
+pdfsubject={Compilation of useful shortcuts}, 
+pdfkeywords={Random Software, Cheatsheet}
+]{hyperref}
+
+\setlength{\unitlength}{1mm} % Set the length that numerical units are measured in
+\setlength{\parindent}{0pt} % Stop paragraph indentation
+
+\renewcommand{\dots}{\ \dotfill{}\ } % Fills in the right amount of dots
+
+\newcommand{\command}[2]{#1~\dotfill{}~#2\\} % Custom command for adding a shorcut
+
+\newcommand{\sectiontitle}[1]{\paragraph{#1} \ \\} % Custom command for subsection titles
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\begin{picture}(297,210) % Create a container for the page content
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION 
+%----------------------------------------------------------------------------------------
+
+\put(10,200){ % Position on the page to put the title
+\begin{minipage}[t]{210mm} % The size and alignment of the title
+\section*{Calculator Manual -- Cheat Sheet} % Title
+\end{minipage}
+}
+
+%----------------------------------------------------------------------------------------
+%	FIRST COLUMN SPECIFICATION
+%----------------------------------------------------------------------------------------
+
+\put(10,180){ % Divide the page
+\begin{minipage}[t]{85mm} % Create a box to house text
+
+%----------------------------------------------------------------------------------------
+%	HEADING ONE
+%----------------------------------------------------------------------------------------
+\sectiontitle{RESUME}
+
+The \textbf{lex} commands generates a lexical analyzer program that analyzes input and breaks it into tokens, such as numbers, letters, or operators. The tokens are defined by grammar rules set uo in the \textbf{lex} specification. \\
+The \textbf{yacc} generates a parser that analyzes input using the tokens identified by the lexical analyzer and performs specified actions, such as flagging improper syntax. Together these commands generate a lexical analyzer and parser program for interpreting input and output handling.\\
+
+%----------------------------------------------------------------------------------------
+%	HEADING TWO
+%----------------------------------------------------------------------------------------
+
+\sectiontitle{Basic Operations}
+			
+expression : expression PLUS expression\\
+\phantom{x}\hspace{4.5em}| expression MINUS expression\\
+\phantom{x}\hspace{4.5em}| expression TIMES expression\\
+\phantom{x}\hspace{4.5em}| expression DIVIDE expression\\
+
+\command{SUMA}{1 + 1}
+\command{RESTA}{1 - 1}
+\command{MULTIPLICACION}{1 * 1}
+\command{DIVISION}{1 / 1}
+
+%----------------------------------------------------------------------------------------
+%	HEADING THREE
+%---------------------------------------------------------------------------------------
+\sectiontitle{MOD}
+
+expression : expression MOD expression\\
+
+\command{MOD OF}{$2\phantom{x.}\%\phantom{x}2$}
+
+%----------------------------------------------------------------------------------------
+
+\end{minipage} % End the first column of text
+} % End the first division of the page
+
+%----------------------------------------------------------------------------------------
+%	SECOND COLUMN SPECIFICATION 
+%----------------------------------------------------------------------------------------
+
+\put(105,180){ % Divide the page
+\begin{minipage}[t]{85mm} % Create a box to house text
+
+%----------------------------------------------------------------------------------------
+%	HEADING FOUR
+%----------------------------------------------------------------------------------------
+
+\sectiontitle{POWER}
+
+expression : expression POW expression\\
+
+\command{POWER OF}{$2\phantom{x}\land\phantom{x}2$}
+
+\sectiontitle{FUNCTIONS}
+
+expression : \\
+\phantom{xxxx} FUNCTION LPAREN expression RPAREN\\
+
+\command{\phantom{$\$$}SINE}{sen(1)}
+\vspace{0.5em}
+\command{COSINE}{cos(1)}
+\vspace{0.5em}
+\command{TANGENT}{tan(1)}
+\vspace{0.5em}
+\command{INVERSE TANGENT}{invtan(1)}
+\vspace{0.5em}
+\command{INVERSE SINE}{invsen(1)}
+\vspace{0.5em}
+\command{INVERSE COSINE}{invcos(1)}
+\vspace{0.5em}
+\command{HIPERBOLIC TANGENT}{tanh(1)}
+\vspace{0.5em}
+\command{HIPERBOLIC COSINE}{cosh(1)}
+\vspace{0.5em}
+\command{HIPERBOLIC SINE}{senh(1)}
+\vspace{0.5em}
+\command{INVERSE HIPERBOLIC SINE}{asenh(1)}
+\vspace{0.5em}
+\command{INVERSE HIPERBOLIC COSINE}{acosh(1)}
+\vspace{0.5em}
+\command{INVERSE HIPERBOLIC TANGENT}{atanh(1)}
+\vspace{0.5em}
+\command{LOGARITM BASE 10}{log10(1)}
+\vspace{0.5em}
+\command{LOGARITM BASE 2}{log2(1)}
+\vspace{0.5em}
+\command{SQUARE ROOT}{sqrt(1)}
+\vspace{0.5em}
+\command{NATURAL LOGARITM}{ln(1) | nlog(1)}
+
+%----------------------------------------------------------------------------------------
+
+\end{minipage} % End the second column of text
+} % End the second division of the page
+
+%----------------------------------------------------------------------------------------
+%	THIRD COLUMN SPECIFICATION 
+%----------------------------------------------------------------------------------------
+
+\put(200,180){ % Divide the page
+\begin{minipage}[t]{85mm} % Create a box to house tex
+
+\sectiontitle{SET OPERATIONS} % Heading five
+
+\command{\phantom{.}DEFINE A SET}{A=\{1,2,3\}}
+\vspace{1mm}
+\command{DEFINE A SET}{B=\{3,4,5\}}
+\vspace{1mm}
+\command{UNIVERSE \textbf{just type UNI}}{\{1,2,3,4,5\}}
+\vspace{1.5mm}
+\command{INTERSECTION}{$A \cap B$}
+\command{\phantom{x}}{\{3\}}
+\vspace{1.5mm}
+\command{UNION}{$A \cup B$}
+\command{\phantom{x}}{\{1,2,3,4,5\}}
+\vspace{1.5mm}
+\command{SYMMETRIC DIFFERENCE}{$A g B$}
+\command{\phantom{x}}{\{1,2,4,5\}}
+\vspace{1.5mm}
+\command{DIFFERENCE}{$A \backslash B$}
+\command{\phantom{x}}{\{1,2\}}
+\vspace{1.5mm}
+\command{COMPLEMENT}{$A'$}
+\command{\phantom{x}}{\{4,5\}}
+\vspace{1.5mm}
+\command{EMPTY SET}{$\emptyset$}
+\command{\phantom{x}}{\{$\emptyset$\}}
+
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	IMPORTANT FILES
+%----------------------------------------------------------------------------------------
+
+\sectiontitle{Important files}
+
+\texttt{have a python3 version}
+
+\texttt{install ply package with \$pip install ply}
+
+\vspace{\baselineskip} % Whitespace before the next section
+
+%----------------------------------------------------------------------------------------
+%	LINKS AND INFORMATION
+%----------------------------------------------------------------------------------------
+
+\sectiontitle{Links and information}
+
+\url{https://www.dabeaz.com/ply/}
+
+\url{https://www.dabeaz.com/ply/ply.html}
+
+%----------------------------------------------------------------------------------------
+%	FOOTNOTE
+%----------------------------------------------------------------------------------------
+
+\vspace{\baselineskip}
+\linethickness{0.5mm} % Thickness of the footer line
+{\color{mygray}\line(1,0){30}} % Print the line with a custom color
+
+\footnotesize{
+Created by Luis Ballado, 2022\\ 
+\url{https://luis.madlab.mx/}\\
+				
+Released under the MIT license.
+}
+
+\end{minipage} % End the third column of text
+} % End the third division of the page
+\end{picture} % End the container for the entire page
+
+\end{document}
