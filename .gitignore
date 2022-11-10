@@ -1,7 +1,7 @@
 *.py~
 *.log
 *.aux
-parser.out
+*.out
 parsertab.py
 *.class
 *.java~
