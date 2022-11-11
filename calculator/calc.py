@@ -1,4 +1,3 @@
-
 import math
 
 #####################################################################
@@ -53,7 +52,7 @@ t_NAME         = r'[a-zA-Z_][a-zA-Z0-9_]*'
 t_POW          = r'\^'
 t_MOD          = r'\%'
 t_SET          = r'\{([^]]*)\}'
-t_UNION        = r'U'
+t_UNION        = r'∪'
 t_INTERSECTION = r'∩'
 t_DSIM         = r'ß' #r'^[g]$' #solo uno
 t_DIFF         = r'\\'
@@ -134,7 +133,8 @@ def p_statement_assign(t):
     #t[2] -> =
     #t[3] -> 0
     print(t[1])
-    if t[1] in names:
+    
+    if t[1] in names and isinstance(t[3],set):
         print('Ya existe algo y es')
         print(names[t[1]])
         #qutar los elemento del viejo conjunto a UNI pero que no formen parte de los otros conjuntos
@@ -146,12 +146,13 @@ def p_statement_assign(t):
             print(names.keys())
             for _n_ in names.keys():
                 print(_n_)
-                if _r_ in names[_n_]:
-                    print('Saltar')
-                    print('Que Salto?')
-                    print(_r_)
-                else:
-                    names['UNI'].remove(_r_)
+                if _n_ != 'UNI':
+                    if _r_ not in names[_n_]:
+                        print('Saltar')
+                        print('Que Salto?')
+                        print(_r_)
+                    else:
+                        names['UNI'].remove(_r_)
                                             
     #print(t[2])
     #print(t[3])
