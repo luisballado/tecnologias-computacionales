@@ -46,6 +46,8 @@
 %	ASSIGNMENT INFORMATION
 %----------------------------------------------------------------------------------------
 
+
+
 \title{Project \#1} % Assignment title
 
 \author{Luis Alberto Ballado Aradias} % Student name
@@ -69,9 +71,10 @@
 %----------------------------------------------------------------------------------------
 {\color{teal}
 \dotfill
-LEX AND YACC
+Polynomial Calculator
 \dotfill}
 
+\phantom{}\\
 TALK A bit about lex and yacc
 
 %\begin{figure}[H]
@@ -79,7 +82,6 @@ TALK A bit about lex and yacc
 %  \includegraphics[scale=0.5]{images/chomsky_hierarchy.jpg}
 %\end{figure}
 
-\newpage
 The program is divided into 4 types:
 \begin{enumerate}
 \item Tokenization
@@ -89,6 +91,7 @@ The program is divided into 4 types:
 \item Funcion de produccion
 \end{enumerate}
 
+\newpage
 \section*{{\color{BlueViolet}Tokenization}}
 
 Most restrictive of the set, they generate regular languages. They must have a single non-terminal on the left-hand-side and a right-hand-side consisting of a single terminal or single terminal followed by a single non-terminal.\\\\
@@ -97,8 +100,8 @@ Most restrictive of the set, they generate regular languages. They must have a s
 
 Regex to define tokens such as identifiers, language keywords in programming languages. A coin vending machine that accepts only 1-Rupee, 2-Rupee and 5-Rupee coins has a regular language with only three words – 1, 2, 5.
 
-
-\section*{{\color{Apricot}Context-Free Grammar}}
+\newpage
+\section*{{\color{Apricot}Especificacion de tokens}}
 %------------------------------------------------
 
 Generate context-free languages, a category of immense interest to NLP practitioners. Here all rules take the form $A \implies \beta$, where A is a single non-terminal symbol and $\beta$ is a string of symbols.\\\\
@@ -109,7 +112,8 @@ Statement blocks in programming languages such as functions in parentheses, If-E
 
 %----------------------------------------------------------------------------------------
 
-\section*{{\color{Cerulean}Context-Sensitive Grammar}}
+\newpage
+\section*{{\color{Cerulean}Funciones de especificacion de tokens}}
 %------------------------------------------------
 The highest programmable level, they generate context-sensitive languages. They have rules of the form $\alpha A \beta \implies \alpha \gamma \beta$ with A as a non-terminal and $\alpha$, $\beta$, $\gamma$ as strings of terminals and non-terminals. Strings $\alpha$, $\beta$ may be empty, but $\gamma$ must be nonempty.\\\\
 
@@ -117,7 +121,8 @@ The highest programmable level, they generate context-sensitive languages. They 
 
 Though most language constructs in natural language are context-free, in some situations linear matching of tokens has to be done, such as - The square roots of 16, 9 and 4 are 4, 3 and 2, respectively. Here 16 is to be matched with 4, 9 is matched with 3, and 4 is matched with 2.
 
-\section*{{\color{RoyalPurple}Recursively enumerable grammar}}
+\newpage
+\section*{{\color{RoyalPurple}Reglas de precedencia}}
 %------------------------------------------------
 Are too generic and unrestricted to describe the syntax of either programming or natural languages\\\\
 
@@ -128,7 +133,7 @@ A language with no restrictions is not conducive to communication or automation.
 %----------------------------------------------------------------------------------------
 
 \newpage
-\section*{{\color{RoyalPurple}Regular Expression in Real Application}}
+\section*{{\color{RoyalPurple}Función de producción}}
 
 Exercise: Create a regular expression to accept vehicle registration plates of Mexico State. There are three-letter series assigned \textbf{LGA-PEZ}
 
@@ -143,19 +148,6 @@ Exercise: Create a regular expression to accept vehicle registration plates of M
 
 Explanation:\\
 
-\begin{itemize}
-\item  $\wedge$ asserts position at start of the string
-\item Match a single character present in the list below $\boldsymbol{[L-P]\{1\}}$ matches the previous token exactly \textbf{one} time (meaningless quantifier)\\
-  $\boldsymbol{[L-P]}$ matches a single character in the range between L and P (case sensitive)
-\item Match a single character present in the list below $\boldsymbol{[G-ZA-E]\{1\}}$ matches the previous token exactly \textbf{one} time (meaningless quantifier)\\
-  $\boldsymbol{[G-Z]}$ matches a single character in the range between G and Z (case sensitive)\\
-\item Match a single character present in the list below $\boldsymbol{[A-Z]\{1\}}$ matches the previous token exactly one time (meaningless quantifier)\\
-  $\boldsymbol{[A-Z]}$ matches a single character in the range between A and Z (case sensitive)
-\item $\boldsymbol{\textbackslash d}$ matches a digit (equivalent to [0-9])\\
-  $\boldsymbol{\{2\}}$ matches the previous token exactly 2 times
-\item $\boldsymbol{\textbackslash d}$ matches a digit (equivalent to [0-9])\\
-  $\boldsymbol{\{2\}}$ matches the previous token exactly 2 times
-  \item $\boldsymbol{\$}$ asserts position at the end of the string, or before the line terminator right at the end of the string (if any)
-\end{itemize}
+
 
 \end{document}
