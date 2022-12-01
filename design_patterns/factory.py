@@ -3,18 +3,18 @@ from math import pi
 
 #Abstract class
 class Figura(ABC):
-
-	@abstractmethod
+        
+        @abstractmethod
 	def draw(self):
 		pass
 	@abstractmethod
 	def area(self):
 		pass
-
+        
 #Clases concretas
 class Circulo(Figura):
 	def __init__(self, radio=1.0):
-		self.radio=radio
+                self.radio=radio
 	def area(self):
 		return (pi*(self.radio*self.radio))
 	def draw(self):
@@ -36,5 +36,5 @@ class FiguraFactory:
 		if type=="Triangulo":
 			return Triangulo(parameters['base'], parameters['altura'])
 		else:
-			if type=="Circulo":
+                        if type=="Circulo":
 				return Circulo(parameters['radio'])

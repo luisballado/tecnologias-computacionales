@@ -1,4 +1,3 @@
-
 #Implementación del patron Singleton
 class SingleConversion:
 	__instance=None
