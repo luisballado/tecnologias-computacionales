@@ -9,6 +9,7 @@ class DISTRIBUCION(ABC):
     @abstractmethod
     def get_distribution(self):
         pass
+
     @abstractmethod
     def get_something(self):
         pass
@@ -18,20 +19,17 @@ class Binomial(DISTRIBUCION):
     Binomial distribution is a probability distribution 
     that summarises the likelihood that a variable will take 
     one of two independent values under a given set of parameters.
+
     Attributes
     ----------
-    says_str : str
-        a formatted string to print out what the animal says
-    name : str
-        the name of the animal
-    sound : str
-        the sound that the animal makes
-    num_legs : int
-        the number of legs the animal has (default 4)
-
+    n : int
+        numero de ensayos
+    p : float
+        probabilidad de un exito en cualquiera de los ensayos
+    
     Methods
     -------
-    says(sound=None)
+    get_distribution(sound=None)
         Prints the animals name and what sound it makes
     """
     
@@ -39,12 +37,11 @@ class Binomial(DISTRIBUCION):
         """
         Parameters
         ----------
-        name : str
+        
+        n : str
             The name of the animal
-        sound : str
+        p : str
             The sound the animal makes
-        num_legs : int, optional
-            The number of legs the animal (default is 4)
         """
         self.n = n
         self.p = p
@@ -64,17 +61,21 @@ class Binomial(DISTRIBUCION):
         return (math.factorial(self.n))/(math.factorial(self.n-r)*math.factorial(r))
         
     def get_distribution(self,r=0):
+        """
+        Args:
+            x exitos
+        """
         comb = self.get_combinations(r)
         return comb * self.p**r*(1-self.p)**(self.n-r)
 
     def get_something(self):
         print("Hola")
-        
+
 class Poisson(DISTRIBUCION):
-    ''' Poisson distribution is the discrete probability distribution 
-    which represents the probability of occurrence of an event r number 
-    of times in a given interval of time or space if these events occur 
-    with a known constant mean rate and are independent of each other. 
+    ''' Poisson distribution represents the probability of occurrence
+    of an event r number of times in a given interval of time or space
+    if these events occur with a known constant mean rate and are
+    independent of each other. 
     This type of probability is used in many cases where events occur 
     randomly, but with a known average rate. The number of events that 
     happen during an interval is dependent on the time elapsed rather 
@@ -123,12 +124,18 @@ class Gausiana(DISTRIBUCION):
 class DistribucionFactory:
     def __init__(self):
         pass
+
     def getDistribution(self, type, parameters:dict):
         if type=="Binomial":
-            return Binomial(parameters[n])
-        else:
+            return Binomial(parameters)
+        elif type=="Poisson":
             print("Hola")
-    
+        elif type=="Geometrica":
+            print("Hola")
+        elif type=="Exponencial":
+            print("Hola")
+        elif type=="Gausiana":
+            print("Hola")
 """
 d = Binomial(n=6,p=0.6)
 
