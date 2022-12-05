@@ -1,5 +1,9 @@
 from abc import ABC, abstractmethod
 import math
+import numpy as np
+import random
+from scipy.integrate import quad
+import matplotlib.pyplot as plt
 
 __author__ = "Luis Ballado"
 
@@ -11,9 +15,13 @@ class DISTRIBUCION(ABC):
         pass
 
     @abstractmethod
-    def get_something(self):
+    def get_sample(self):
         pass
 
+    @abstractmethod
+    def get_graph(self):
+        pass
+    
 class Binomial(DISTRIBUCION):
     """
     Binomial distribution is a probability distribution 
@@ -33,7 +41,7 @@ class Binomial(DISTRIBUCION):
         Prints the animals name and what sound it makes
     """
     
-    def __init__(self,n,p):
+    def __init__(self,dictionary):
         """
         Parameters
         ----------
@@ -43,8 +51,8 @@ class Binomial(DISTRIBUCION):
         p : str
             The sound the animal makes
         """
-        self.n = n
-        self.p = p
+        self.n = dictionary['n']
+        self.p = dictionary['p']
 
     def get_combinations(self,r=0):
         """Gets and prints the spreadsheet's header columns
@@ -66,11 +74,16 @@ class Binomial(DISTRIBUCION):
             x exitos
         """
         comb = self.get_combinations(r)
-        return comb * self.p**r*(1-self.p)**(self.n-r)
+        res = comb * self.p**r*(1-self.p)**(self.n-r)
+        print(res)
+        return res
+        
+    def get_sample(self):
+        print("Hola Binomial Sample")
 
-    def get_something(self):
-        print("Hola")
-
+    def get_graph(self):
+        print("Dibujar grafica Binomial")
+        
 class Poisson(DISTRIBUCION):
     ''' Poisson distribution represents the probability of occurrence
     of an event r number of times in a given interval of time or space
@@ -80,47 +93,102 @@ class Poisson(DISTRIBUCION):
     randomly, but with a known average rate. The number of events that 
     happen during an interval is dependent on the time elapsed rather 
     than the total time available.'''
-    def __init__(self,k=0,mu=0):
-        self.k = k
-        self.mu = mu
+    def __init__(self,data):
+        self.k = data['k']
+        self.mu = data['mu']
         
     def get_distribution(self):
         e=2.71828
+        print("get_distribution")
         return (self.mu**self.k)*(e**(-1*self.mu))/(math.factorial(self.k))
 
-    def get_something(self):
-        print("Hola")
+    def get_sample(self):
+        print("Hola Poisson")
 
+    def get_graph(self):
+        print("Dibujar grafica Poisson")
+        
 class Geometrica(DISTRIBUCION):
-    def __init__(self):
+    def __init__(self,data):
         pass
 
     def get_distribution(self):
-        return None
+        return 0
 
-    def get_something(self):
-        return None
+    def get_sample(self):
+        print("Hola Geometrica")
+        return 0
 
+    def get_graph(self):
+        print("Dibujar grafica Geometrica")
+    
 class Exponencial(DISTRIBUCION):
-    def __init__(self):
+    def __init__(self,data):
         pass
 
     def get_distribution(self):
-        return None
+        print("get_distribution")
+        return 0
+        
+    def get_sample(self):
+        print("Hola Exponencial")
+        return 0
 
-    def get_something(self):
-        return None
-
+    def get_graph(self):
+        print("Dibujar grafica Exponencial")
+        
 class Gausiana(DISTRIBUCION):
-    def __init__(self):
+    def __init__(self,data):
         pass
 
     def get_distribution(self):
-        return None
+        print("get_distribution")
+        return 0
+        
+    def get_sample(self):
+        print("Hola Gausiana")
+        return 0
 
-    def get_something(self):
-        return None
+    def get_graph(self):
+        print("Dibujar grafica Gausiana")
 
+class Normal(DISTRIBUCION):
+    def __init__(self,data):
+        pass
+    
+    #Ojo esta es función es la normal estandarizada    
+    def get_distribution(self, z):
+        coef=1/(math.sqrt(2*(math.pi)))
+        exp=np.exp(-0.5*pow((z),2))
+        return (coef*exp)  
+    
+    def getProbability(self,x,mu,sigma):
+        z=(x-mu)/sigma
+        p=quad(self.get_distribution,np.NINF, z)
+        return p[0]
+    
+    #Aplicamos el método del rechazo
+    def get_sample(self, cardinality, mu,sigma):
+        sample=[]
+        for i in range(cardinality):
+            while True:
+                u=random.random()
+                fu=random.random()
+                z=(u-mu)/sigma
+                fz=self.get_distribution(z)
+                if(fu<=fz):
+                    sample.append(u)
+                    break
+        return sample
+
+    def get_graph(self,data):
+        print("Dibujar grafica Normal")
+        xpoints = np.array([0,1,2,3,4])
+        ypoints = np.array(data)
+        plt.plot(xpoints,ypoints)
+        plt.show()
+        pass
+    
 class DistribucionFactory:
     def __init__(self):
         pass
@@ -129,13 +197,15 @@ class DistribucionFactory:
         if type=="Binomial":
             return Binomial(parameters)
         elif type=="Poisson":
-            print("Hola")
+            return Poisson(parameters)
         elif type=="Geometrica":
-            print("Hola")
+            return Geometrica(parameters)
         elif type=="Exponencial":
-            print("Hola")
+            return Exponencial(parameters)
         elif type=="Gausiana":
-            print("Hola")
+            return Gausiana(parameters)
+        else:
+            return Normal(parameters)
 """
 d = Binomial(n=6,p=0.6)
 
