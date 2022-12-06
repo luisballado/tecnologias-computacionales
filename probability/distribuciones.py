@@ -4,47 +4,31 @@ import math
 __author__ = "Luis Ballado"
 
 #Abstract class
-class DISTRIBUCION(ABC):
+class Distribution(ABC):
     
     @abstractmethod
     def get_distribution(self):
         pass
+    
     @abstractmethod
     def get_something(self):
         pass
-
-class Binomial(DISTRIBUCION):
+    
+class Binomial(Distribution):
     """
     Binomial distribution is a probability distribution 
     that summarises the likelihood that a variable will take 
     one of two independent values under a given set of parameters.
-    Attributes
-    ----------
-    says_str : str
-        a formatted string to print out what the animal says
-    name : str
-        the name of the animal
-    sound : str
-        the sound that the animal makes
-    num_legs : int
-        the number of legs the animal has (default 4)
-
-    Methods
-    -------
-    says(sound=None)
-        Prints the animals name and what sound it makes
     """
     
     def __init__(self,n,p):
         """
-        Parameters
+        Parametros
         ----------
-        name : str
-            The name of the animal
-        sound : str
-            The sound the animal makes
-        num_legs : int, optional
-            The number of legs the animal (default is 4)
+        n : int
+            The n variable
+        p : int
+            The p variable
         """
         self.n = n
         self.p = p
@@ -70,7 +54,7 @@ class Binomial(DISTRIBUCION):
     def get_something(self):
         print("Hola")
         
-class Poisson(DISTRIBUCION):
+class Poisson(Distribution):
     ''' Poisson distribution is the discrete probability distribution 
     which represents the probability of occurrence of an event r number 
     of times in a given interval of time or space if these events occur 
@@ -90,7 +74,7 @@ class Poisson(DISTRIBUCION):
     def get_something(self):
         print("Hola")
 
-class Geometrica(DISTRIBUCION):
+class Geometrica(Distribution):
     def __init__(self):
         pass
 
@@ -100,7 +84,7 @@ class Geometrica(DISTRIBUCION):
     def get_something(self):
         return None
 
-class Exponencial(DISTRIBUCION):
+class Exponencial(Distribution):
     def __init__(self):
         pass
 
@@ -110,7 +94,7 @@ class Exponencial(DISTRIBUCION):
     def get_something(self):
         return None
 
-class Gausiana(DISTRIBUCION):
+class Gausiana(Distribution):
     def __init__(self):
         pass
 
@@ -120,7 +104,7 @@ class Gausiana(DISTRIBUCION):
     def get_something(self):
         return None
 
-class DistribucionFactory:
+class DistributionFactory:
     def __init__(self):
         pass
     def getDistribution(self, type, parameters:dict):
