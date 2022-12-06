@@ -1,0 +1,219 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% fphw Assignment
+% LaTeX Template
+% Version 1.0 (27/04/2019)
+%
+% This template originates from:
+% https://www.LaTeXTemplates.com
+%
+% Authors:
+% Class by Felipe Portales-Oliva (f.portales.oliva@gmail.com) with template 
+% content and modifications by Vel (vel@LaTeXTemplates.com)
+%
+% Template (this file) License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[
+	12pt, % Default font size, values between 10pt-12pt are allowed
+	%letterpaper, % Uncomment for US letter paper size
+	%spanish, % Uncomment for Spanish
+]{fphw}
+
+% Template-specific packages
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[dvipsnames]{xcolor}
+\usepackage{graphicx} % Required for including images
+\usepackage{amsmath}
+\usepackage{booktabs} % Required for better horizontal rules in tables
+\usepackage{listings} % Required for insertion of code
+\usepackage{enumerate} % To modify the enumerate environment
+\usepackage{ragged2e}
+\usepackage{cancel}
+\usepackage{MnSymbol,bbding,pifont}
+\usepackage{lscape}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{float,graphicx}
+\newcolumntype{M}{>{$}c<{$}}
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{Assignment \#6} % Assignment title
+
+\author{Luis Alberto Ballado Aradias} % Student name
+
+\date{\today} % Due date
+
+\institute{Centro de Investigación y de Estudios Avanzados del IPN \\ Unidad Tamaulipas} % Institute or school name
+
+\class{Tecnologías Computacionales (Sep - Dec 2022)} % Course or class name
+
+\professor{Dr. Edwin Aldana Bobadilla} % Professor or teacher in charge of the assignment
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Output the assignment title, created automatically using the information in the custom commands above
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT CONTENT
+%----------------------------------------------------------------------------------------
+
+\section*{{\color{Apricot}Generics in programming}}
+%------------------------------------------------
+
+
+\textbf{Generic Programming} is a style of computer programming in which algorithms are written in terms of types to be specified later that are then instantiated when needed for specific types provided as parameters. This approach permits writing common functions or types that differ only in the set of types on which they operate when used, reducing \textbf{duplication}.\\
+
+Allow functions, methods and classes to work with arguments of any type whilst maintaining the information on the relationships between thigs, such as arguments and return values.\\
+
+In other words, a \textbf{generic} is a function or similar that will work on a variety of input types.\\
+
+One great example is the List class. When providing type hints for a list class, we can provide the type that should be stored in the class in square brackets []
+
+Advantages of generics
+
+\begin{itemize}
+\item \textbf{Reusability} - You can use a single generic type def	inition for multiple purposes in the same code without any alterations. For example, you can create a generic method to add two numbers. This method can be used to add two integers as well as two floats without any modification in the code.
+\item \textbf{Type Safety} - Generic data types provide better type safety, especially in the case of collections. When using generics you need to define the type of objects to be passed to a collection. This helps the compiler to ensure that only those object types that are defined in the definition can be passed to the collection.
+\item \textbf{Performance} - Generic types provide better performance as compared to normal system types because they reduce the need for boxing, unboxing, and typecasting of variables or objects. 
+\end{itemize}
+
+\newpage
+\section*{{\color{Cerulean}Generics in Java}}
+%------------------------------------------------
+
+Generics means parameterized types. The idea is to allow type to be a parameter to methods, classes, and interfaces. Using Generics, it is possible to create classes that work with different data types.
+
+\subsection*{Types of Java Generics}
+
+\begin{itemize}
+\item \textbf{Generic Method:} Takes a parameter and returns some value after performing a task.
+\item \textbf{Generic Class:} It is implemented exactly like a non-genetic class, but it contains a type parameter section.
+\end{itemize}
+
+\subsection*{Example in Java (Generic Class)}
+
+\begin{verbatim}
+public class Box<T> {
+   private T t;
+
+   public void add(T t) {
+      this.t = t;
+   }
+
+   public T get() {
+      return t;
+   }
+
+   public static void main(String[] args) {
+      Box<Integer> integerBox = new Box<Integer>();
+      Box<String> stringBox = new Box<String>();
+    
+      integerBox.add(new Integer(10));
+      stringBox.add(new String("Hello World"));
+
+      System.out.printf("Integer Value :%d\n\n", integerBox.get());
+      System.out.printf("String Value :%s\n", stringBox.get());
+   }
+}
+\end{verbatim}
+
+Salida:
+\begin{verbatim}
+Integer Value :10
+String Value :Hello World
+\end{verbatim}
+
+\newpage
+\section*{{\color{RoyalPurple}Generics in C\#}}
+
+Generic classes and methods combine reusability, type safety, and efficiency in a way that their non-generic counterparts cannot. Generics are most frequently used with collections and the methods that operate on them.
+
+\subsection*{Example in C\#}
+
+\begin{verbatim}
+class DataStore<T>
+{
+    public T Data { get; set; }
+}
+
+class KeyValuePair<TKey, TValue>
+{
+    public TKey Key { get; set; }
+    public TValue Value { get; set; }
+}
+
+
+KeyValuePair<int, string> kvp1 = new KeyValuePair<int, string>();
+		kvp1.Key = 100;
+		kvp1.Value = "Hundred";
+		Console.WriteLine(kvp1.Key + ", " + kvp1.Value);
+
+KeyValuePair<int, string> kvp1 = new KeyValuePair<int, string>();
+		kvp1.Key = 100;
+		kvp1.Value = "Hundred";
+		Console.WriteLine(kvp1.Key + ", " + kvp1.Value);
+\end{verbatim}
+
+\newpage
+\section*{{\color{RoyalPurple}Generics in Python}}
+
+In Python, all variables and all parameters of a function are the names bound to untyped references. The type is bound to the passed object, and it is checked only when the operation with the object is executed.\\
+
+For example on the calculator proyect I defined the Union of two set as the sum (setA + setB) of the two set insted of using setA.union(setB), because of that, any function in Python is a generic function.
+
+\subsection*{Example in Python}
+
+\begin{verbatim}
+from typing import TypeVar, Generic, List
+
+T = TypeVar('T')
+
+class Stack(Generic[T]):
+    def __init__(self) -> None:
+        # Create an empty list with items of type T
+        self.items: List[T] = []
+
+    def push(self, item: T) -> None:
+        self.items.append(item)
+
+    def pop(self) -> T:
+        return self.items.pop()
+
+    def empty(self) -> bool:
+        return not self.items
+\end{verbatim}
+
+Salida
+\begin{verbatim}
+stack = Stack[int]()
+stack.push(2)
+stack.pop()
+stack.push('x') # as we defined as int instance types error 
+\end{verbatim}
+
+\subsection*{Summary}
+Generics is a class which allows the user to define classes and methods.
+
+When we are writting a code that should handle different data types, Generics takes an important role and icrease the reusability of the code, and also removes the possibilities of boxing and unboxing code.
+
+\subsection*{References}
+\phantom{}\\
+\url{https://medium.com/@steveYeah/using-generics-in-python-99010e5056eb}\\
+\url{https://www.geeksforgeeks.org/generics-in-java/}\\
+\url{https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/generics}\\
+\url{https://stackoverflow.com/questions/6725868/generics-templates-in-python}\\
+\url{https://www.tutorialspoint.com/java/java_generics.htm}
+
+\end{document}
