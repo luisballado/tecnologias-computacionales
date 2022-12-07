@@ -5,46 +5,36 @@ d = DistribucionFactory()
 
 #datos
 datos = {}
-datos['n']=3
-datos['p']=.50
+datos['p']=0.80
 
-"""
 #Binomial
+"""
 binomial = d.getDistribution("Binomial",datos)
-binomial.get_distribution()
-binomial.get_sample()
-binomial.get_graph()
+print(binomial.get_probability(x=6))
+"""
 
-datos = {}
-datos['k']=3
-datos['mu']=.50
+#Poisson
+"""
+poisson = d.getDistribution("Poisson",datos)
+print(poisson.get_probability(x=5))
+"""
 
 #Exponencial
+"""
 exponencial = d.getDistribution("Exponencial",datos)
-exponencial.get_distribution()
-exponencial.get_sample()
-exponencial.get_graph()
+print(exponencial.get_probability(0))
+"""
 
 #Geometrica
 geometrica = d.getDistribution("Geometrica",datos)
-geometrica.get_distribution()
-geometrica.get_sample()
-geometrica.get_graph()
+sample = pd.DataFrame(geometrica.get_sample(1000),columns=['n_gen'])
+sample['PDF']=sample['n_gen'].apply(lambda x: geometrica.get_probability(x))
 
-#Gausiana
-gausiana = d.getDistribution("Gausiana",datos)
-gausiana.get_distribution()
-gausiana.get_sample()
-gausiana.get_graph()
+plt.scatter(sample['n_gen'],sample['PDF'])
+plt.savefig('geometrica.png')
 
-#Poisson
-poisson = d.getDistribution("Poisson",datos)
-poisson.get_distribution()
-poisson.get_sample()
-poisson.get_graph()
 """
-
 #Normal
-normal = d.getDistribution("Normal",datos)
-normal.get_graph(normal.get_sample(5,38.8,11.4))
-
+normal = d.getDistribution("Normal",{})
+print(normal.get_probability(3,4.11,1.37))
+"""
