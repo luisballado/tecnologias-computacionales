@@ -2,39 +2,38 @@ from distribuciones import *
 
 #Constructor clase factory
 d = DistribucionFactory()
-
-#datos
+"""
+#Binomial
+datos = {}
+datos['n'] = 100
+datos['p'] = 0.5
+binomial = d.getDistribution("Binomial",datos)
+binomial.get_graph(100,False)
+"""
+"""
+#Poisson
+datos = {}
+datos['mu']=2
+poisson = d.getDistribution("Poisson",datos)
+poisson.get_graph(100,False)
+"""
+"""
+#Exponencial
+datos = {}
+datos['alpha']=2
+exponencial = d.getDistribution("Exponencial",datos)
+exponencial.get_graph(100,True)
+"""
+"""
+#Geometrica
 datos = {}
 datos['p']=0.80
-
-#Binomial
-"""
-binomial = d.getDistribution("Binomial",datos)
-print(binomial.get_probability(x=6))
-"""
-
-#Poisson
-"""
-poisson = d.getDistribution("Poisson",datos)
-print(poisson.get_probability(x=5))
-"""
-
-#Exponencial
-"""
-exponencial = d.getDistribution("Exponencial",datos)
-print(exponencial.get_probability(0))
-"""
-
-#Geometrica
 geometrica = d.getDistribution("Geometrica",datos)
-sample = pd.DataFrame(geometrica.get_sample(1000),columns=['n_gen'])
-sample['PDF']=sample['n_gen'].apply(lambda x: geometrica.get_probability(x))
-
-plt.scatter(sample['n_gen'],sample['PDF'])
-plt.savefig('geometrica.png')
-
+geometrica.get_graph(100,True)
 """
+
 #Normal
 normal = d.getDistribution("Normal",{})
-print(normal.get_probability(3,4.11,1.37))
-"""
+normal.get_graph(100,3.1400,1.1214,True)
+#print(normal.get_probability(3,4.11,1.37))
+

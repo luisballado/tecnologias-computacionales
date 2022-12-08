@@ -38,23 +38,29 @@ class Binomial(DISTRIBUCION):
         return res
 
     #Aplicamos el método del rechazo
-    def get_sample(self, cardinality, mu,sigma):
+    def get_sample(self, cardinality):
         sample=[]
         for i in range(cardinality):
+            u=random.random()
+            k=0
+            f=self.get_probability(k)
             while True:
-                u=random.random()
-                fu=random.random()
-                z=(u-mu)/sigma
-                fz=self.get_distribution(z)
-                if(fu<=fz):
-                    sample.append(u)
+                f+=self.get_probability(k)
+                if(f>u):
                     break
+                k=k+1
+            sample.append(k)
         return sample
-    
-    def get_graph(self):
-        print("Dibujar grafica Binomial")
         
-
+    def get_graph(self,cardinality,scatter):
+        sample = pd.DataFrame(self.get_sample(cardinality),columns=['n_gen'])
+        sample['pdf'] = sample['n_gen'].apply(lambda x: self.get_probability(x))
+        if scatter:
+            plt.scatter(sample['n_gen'],sample['pdf'])
+        else:
+            plt.stem(sample['n_gen'],sample['pdf'])
+        plt.savefig('binomial.png')
+        
 class Poisson(DISTRIBUCION):
     
     def __init__(self,data):
@@ -65,21 +71,27 @@ class Poisson(DISTRIBUCION):
         return (self.mu**x)*(e**(-1*self.mu))/(math.factorial(x))
 
     #Aplicamos el método del rechazo
-    def get_sample(self, cardinality, k, mu):
+    def get_sample(self, cardinality):
         sample=[]
         for i in range(cardinality):
             while True:
-                u=random.random()
-                fu=random.random()
-                z=(u-mu)/sigma
-                fz=self.get_distribution(z)
+                u=random.randint(0,10)
+                fu=random.randint(0,10)
+                x=random.randint(0,10)
+                fz=self.get_probability(x)
                 if(fu<=fz):
                     sample.append(u)
                     break
         return sample
     
-    def get_graph(self):
-        print("Dibujar grafica Poisson")
+    def get_graph(self,cardinality,scatter):
+        sample = pd.DataFrame(self.get_sample(cardinality),columns=['n_gen'])
+        sample['pdf'] = sample['n_gen'].apply(lambda x: self.get_probability(x))
+        if scatter:
+            plt.scatter(sample['n_gen'],sample['pdf'])
+        else:
+            plt.stem(sample['n_gen'],sample['pdf'])
+        plt.savefig('poisson.png')
         
 class Geometrica(DISTRIBUCION):
     def __init__(self,data):
@@ -100,9 +112,15 @@ class Geometrica(DISTRIBUCION):
                     break
         return sample
 
-    def get_graph(self):
-        print("Dibujar grafica Geometrica")
-    
+    def get_graph(self,cardinality,scatter):
+        sample = pd.DataFrame(self.get_sample(cardinality),columns=['n_gen'])
+        sample['pdf'] = sample['n_gen'].apply(lambda x: self.get_probability(x))
+        if scatter:
+            plt.scatter(sample['n_gen'],sample['pdf'])
+        else:
+            plt.stem(sample['n_gen'],sample['pdf'])
+        plt.savefig('geometrica.png')
+            
 class Exponencial(DISTRIBUCION):
     def __init__(self,data):
         self.alpha = data['alpha']
@@ -110,21 +128,27 @@ class Exponencial(DISTRIBUCION):
     def get_probability(self,x):
         return self.alpha*math.exp(-self.alpha*x)
     
-    def get_sample(self):
+    def get_sample(self,cardinality):
         sample = []
         for i in range(cardinality):
             while True:
                 u = random.uniform(0,5)
                 fu = random.uniform(0,5)
-                f = self.get_probablity(u)
+                f = self.get_probability(u)
                 if (fu<=f):
                     sample.append(u)
                     break
         return sample
 
-    def get_graph(self):
-        print("Dibujar grafica Exponencial")
-        
+    def get_graph(self,cardinality,scatter):
+        sample = pd.DataFrame(self.get_sample(cardinality),columns=['n_gen'])
+        sample['pdf'] = sample['n_gen'].apply(lambda x: self.get_probability(x))
+        if scatter:
+            plt.scatter(sample['n_gen'],sample['pdf'])
+        else:
+            plt.stem(sample['n_gen'],sample['pdf'])
+        plt.savefig('exponencial.png')
+                
 class Normal(DISTRIBUCION):
     def __init__(self,data):
         pass
@@ -137,7 +161,6 @@ class Normal(DISTRIBUCION):
     
     def get_probability(self,x,mu,sigma):
         z=(x-mu)/sigma
-        print(z)
         p=quad(self.get_distribution,np.NINF, z)
         return p[0]
     
@@ -155,10 +178,15 @@ class Normal(DISTRIBUCION):
                     break
         return sample
 
-    def get_graph(self,data):
-        print("Dibujar grafica Normal")
-        pass
-    
+    def get_graph(self,cardinality,mu,sigma,scatter):
+        sample = pd.DataFrame(self.get_sample(cardinality,mu,sigma),columns=['n_gen'])
+        sample['pdf'] = sample['n_gen'].apply(lambda x: self.get_probability(x,mu,sigma))
+        if scatter:
+            plt.scatter(sample['n_gen'],sample['pdf'])
+        else:
+            plt.stem(sample['n_gen'],sample['pdf'])
+        plt.savefig('gausiana.png')
+        
 class DistribucionFactory:
 
     def __init__(self):
