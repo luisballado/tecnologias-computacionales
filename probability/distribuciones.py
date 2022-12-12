@@ -180,7 +180,7 @@ class Normal(DISTRIBUCION):
 
     def get_graph(self,cardinality,mu,sigma,scatter):
         sample = pd.DataFrame(self.get_sample(cardinality,mu,sigma),columns=['n_gen'])
-        sample['pdf'] = sample['n_gen'].apply(lambda x: self.get_probability(x,mu,sigma))
+        sample['pdf'] = sample['n_gen'].apply(lambda x: self.get_distribution(x))
         if scatter:
             plt.scatter(sample['n_gen'],sample['pdf'])
         else:
