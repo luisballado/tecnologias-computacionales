@@ -209,11 +209,14 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
                     ):
     if n <= 0:
         #Crear un grafico vacio
-        df = pd.DataFrame({})
-        return go.Figure(df)
+        return go.Figure(go.Scatter(x=[0,1,2,0], y=[0,2,0,0], fill="toself"))
         
     else:
+
         print(tipo_distribucion)
+
+        #en acumulada se deben de sumar la prob actual mas la anterior
+        
         if tipo_distribucion == 'Binomial':
             print(acumulada_switch)
             print(binom_valor_n)
@@ -230,9 +233,7 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             df = pd.DataFrame(binomial.get_sample(binom_valor_x),columns=['n_gen'])
             df['pdf'] = df['n_gen'].apply(lambda x: binomial.get_probability(x))
 
-            return go.Figure(data=[go.Scatter(x=df['n_gen'],y=df['pdf'])])
-            
-            
+                        
         elif tipo_distribucion == 'Poisson':
             print(acumulada_switch)
             print(pois_valor_mu)
@@ -247,7 +248,7 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             df = pd.DataFrame(poisson.get_sample(pois_valor_x),columns=['n_gen'])
             df['pdf'] = df['n_gen'].apply(lambda x: poisson.get_probability(x))
 
-            return go.Figure(data=[go.Scatter(x=df['n_gen'],y=df['pdf'])])
+            
             
         elif tipo_distribucion == 'Geometrica':
             print(geom_valor_p)
@@ -262,7 +263,7 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             df = pd.DataFrame(geometrica.get_sample(geom_valor_x),columns=['n_gen'])
             df['pdf'] = df['n_gen'].apply(lambda x: geometrica.get_probability(x))
 
-            return go.Figure(data=[go.Scatter(x=df['n_gen'],y=df['pdf'])])
+            
             
         elif tipo_distribucion == 'Exponencial':
             print(exp_valor_alpha)
@@ -277,9 +278,8 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             df = pd.DataFrame(exponencial.get_sample(exp_valor_x),columns=['n_gen'])
             df['pdf'] = df['n_gen'].apply(lambda x: exponencial.get_probability(x))
 
-            return go.Figure(data=[go.Scatter(x=df['n_gen'],y=df['pdf'])])
-            
-        elif tipo_distribucion == 'Normal':
+                    
+        else:
             print(norm_valor_mu)
             print(norm_valor_sigma)
             print(norm_valor_x)
@@ -291,20 +291,10 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             df = pd.DataFrame(normal.get_sample(norm_valor_x,norm_valor_mu,norm_valor_sigma),columns=['n_gen'])
             df['pdf'] = df['n_gen'].apply(lambda x: normal.get_distribution(x))
 
-            return go.Figure(data=[go.Scatter(x=df['n_gen'],y=df['pdf'])])
-            
 
-        df = pd.DataFrame({
-            "Fruit": ["CCC", "GGOranges", "Bananas", "Apples", "Oranges", "Bananas"],
-            "Amount": [4, 12, 10, 2, 4, 5],
-            "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"]
-        })
+        
+        return go.Figure(data=[go.Scatter(x=df['n_gen'],y=df['pdf'],mode="markers")])
         
         
-        return px.bar(df, x="Fruit", y="Amount", color="City", barmode="group")
-    
-    #Regresar aqui el grafico
-    #Regresar aqui el grafico
-    #Regresar aqui el grafico
     
 app.run(host='0.0.0.0', port=8080, debug=True)
