@@ -5,21 +5,15 @@ import dash_bootstrap_components as dbc
 
 external_stylesheets = ['https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css']
 
+distribuciones = ['Binomial','Poisson','Geometrica','Exponencial','Normal']
+
 app = Dash(
     __name__,
     meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}],
     external_stylesheets=external_stylesheets
 )
 
-df = pd.DataFrame({
-    "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
-    "Amount": [4, 1, 2, 2, 4, 5],
-    "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"]
-})
 
-distribuciones = ['Binomial','Poisson','Geometrica','Exponencial','Normal']
-
-fig = px.bar(df, x="Fruit", y="Amount", color="City", barmode="group")
 
 type_distribution = html.Div(
     [
@@ -117,8 +111,7 @@ controls = dbc.Card(
 
 
 generate_graph = dcc.Graph(
-    id='example-graph',
-    figure=fig
+    id='distribution-graph'
 )
 
 #contenedor principal
@@ -196,7 +189,7 @@ def on_cancel_click(n):
 #Callback del buton ACEPTAR
 #El output debe ser la grafica
 @app.callback(
-    Output('example-output', 'children'),
+    Output('distribution-graph', 'figure'),
     Input('aceptar_btn', 'n_clicks'),
     State('tipo_distribucion','value'),
     State('acumulada_switch', 'value'),
@@ -221,7 +214,10 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
                     norm_valor_mu,norm_valor_sigma,norm_valor_x
                     ):
     if n <= 0:
-        return "Not clicked."
+        #Crear un grafico vacio
+        df = pd.DataFrame({})
+        return px.bar(df)
+        
     else:
         print(tipo_distribucion)
         if tipo_distribucion == 'Binomial':
@@ -243,8 +239,17 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             print(norm_valor_mu)
             print(norm_valor_sigma)
             print(norm_valor_x)
-        return None
 
+
+        df = pd.DataFrame({
+            "Fruit": ["CCC", "GGOranges", "Bananas", "Apples", "Oranges", "Bananas"],
+            "Amount": [4, 12, 10, 2, 4, 5],
+            "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"]
+        })
+        
+        
+        return px.bar(df, x="EjeX", y="EjeY", color="City", barmode="group")
+    
     #Regresar aqui el grafico
     #Regresar aqui el grafico
     #Regresar aqui el grafico
