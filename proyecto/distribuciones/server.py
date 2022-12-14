@@ -248,7 +248,7 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
         })
         
         
-        return px.bar(df, x="EjeX", y="EjeY", color="City", barmode="group")
+        return px.bar(df, x="Fruit", y="Amount", color="City", barmode="group")
     
     #Regresar aqui el grafico
     #Regresar aqui el grafico
