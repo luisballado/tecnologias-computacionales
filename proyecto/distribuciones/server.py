@@ -1,7 +1,9 @@
 from dash import Dash,dcc,html,Input,Output,State
-import plotly.express as px
+import plotly.graph_objs as go
 import pandas as pd
 import dash_bootstrap_components as dbc
+
+from distribuciones import *
 
 external_stylesheets = ['https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css']
 
@@ -13,6 +15,7 @@ app = Dash(
     external_stylesheets=external_stylesheets
 )
 
+d = DistribucionFactory()
 
 
 type_distribution = html.Div(
@@ -26,7 +29,6 @@ type_distribution = html.Div(
             ],
             value="Binomial",
         ),
-        html.Div(id='distribucion_elegida')
     ]
 )
 
@@ -154,14 +156,6 @@ def show_hide_element(value):
         return {'display':'none'},{'display':'none'},{'display':'none'},{'display':'none'},{'display':'none'}
 
     
-
-@app.callback(
-    Output('distribucion_elegida', 'children'),
-    Input('tipo_distribucion', 'value')
-)
-def update_output(value):
-    return f'You have selected {value}'
-
 #Callback del boton CANCELAR
 @app.callback(
     Output('acumulada_switch','value'),
@@ -216,7 +210,7 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
     if n <= 0:
         #Crear un grafico vacio
         df = pd.DataFrame({})
-        return px.bar(df)
+        return go.Figure(df)
         
     else:
         print(tipo_distribucion)
@@ -225,21 +219,80 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             print(binom_valor_n)
             print(binom_valor_p)
             print(binom_valor_x)
+
+            datos = {}
+            datos['n'] = binom_valor_n
+            datos['p'] = binom_valor_p
+            datos['x'] = binom_valor_x
+
+            binomial = d.getDistribution("Binomial",datos)
+            
+            df = pd.DataFrame(binomial.get_sample(binom_valor_x),columns=['n_gen'])
+            df['pdf'] = df['n_gen'].apply(lambda x: binomial.get_probability(x))
+
+            return go.Figure(data=[go.Scatter(x=df['n_gen'],y=df['pdf'])])
+            
+            
         elif tipo_distribucion == 'Poisson':
             print(acumulada_switch)
             print(pois_valor_mu)
             print(pois_valor_x)
+            
+            datos = {}
+            datos['mu'] = pois_valor_mu
+            datos['x'] = pois_valor_x
+            
+            poisson = d.getDistribution("Poisson",datos)
+            
+            df = pd.DataFrame(poisson.get_sample(pois_valor_x),columns=['n_gen'])
+            df['pdf'] = df['n_gen'].apply(lambda x: poisson.get_probability(x))
+
+            return go.Figure(data=[go.Scatter(x=df['n_gen'],y=df['pdf'])])
+            
         elif tipo_distribucion == 'Geometrica':
             print(geom_valor_p)
             print(geom_valor_x)
+
+            datos = {}
+            datos['p'] = geom_valor_p
+            datos['x'] = geom_valor_x
+            
+            geometrica = d.getDistribution("Geometrica",datos)
+            
+            df = pd.DataFrame(geometrica.get_sample(geom_valor_x),columns=['n_gen'])
+            df['pdf'] = df['n_gen'].apply(lambda x: geometrica.get_probability(x))
+
+            return go.Figure(data=[go.Scatter(x=df['n_gen'],y=df['pdf'])])
+            
         elif tipo_distribucion == 'Exponencial':
             print(exp_valor_alpha)
             print(exp_valor_x)
+
+            datos = {}
+            datos['alpha'] = exp_valor_alpha
+            datos['x'] = exp_valor_x
+            
+            exponencial = d.getDistribution("Exponencial",datos)
+            
+            df = pd.DataFrame(exponencial.get_sample(exp_valor_x),columns=['n_gen'])
+            df['pdf'] = df['n_gen'].apply(lambda x: exponencial.get_probability(x))
+
+            return go.Figure(data=[go.Scatter(x=df['n_gen'],y=df['pdf'])])
+            
         elif tipo_distribucion == 'Normal':
             print(norm_valor_mu)
             print(norm_valor_sigma)
             print(norm_valor_x)
 
+            datos = {}
+                        
+            normal = d.getDistribution("Normal",datos)
+            
+            df = pd.DataFrame(normal.get_sample(norm_valor_x,norm_valor_mu,norm_valor_sigma),columns=['n_gen'])
+            df['pdf'] = df['n_gen'].apply(lambda x: normal.get_distribution(x))
+
+            return go.Figure(data=[go.Scatter(x=df['n_gen'],y=df['pdf'])])
+            
 
         df = pd.DataFrame({
             "Fruit": ["CCC", "GGOranges", "Bananas", "Apples", "Oranges", "Bananas"],
