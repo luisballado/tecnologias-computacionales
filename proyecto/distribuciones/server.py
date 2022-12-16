@@ -112,7 +112,7 @@ actions_buttons = html.Div(
         dbc.Button("ACEPTAR", id="aceptar_btn", color="success", className="me-1", n_clicks=0),
         html.Span(id="example-output", style={"verticalAlign": "middle","display":"none"}),
     ],
-    className="d-grid gap-2 d-md-block",
+    className="d-grid gap-2 d-md-flex justify-content-md-center",
 )
 
 #Tarjeta con todos los elementos
@@ -236,7 +236,7 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
                     ):
     if n <= 0:
         #Crear un grafico vacio
-        return go.Figure(go.Scatter(x=[0,0,0,0], y=[0,0,0,0], fill="toself"))
+        return go.Figure(go.Scatter(x=[0], y=[0], fill="toself"))
         
     else:
 
