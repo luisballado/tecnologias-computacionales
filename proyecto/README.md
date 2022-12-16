@@ -1,4 +1,4 @@
-# Project Title
+# Distribuciones
 
 Simple overview of use/purpose.
 
@@ -50,7 +50,7 @@ This project is licensed under the [NAME HERE] License - see the LICENSE.md file
 
 ## Acknowledgments
 
-Inspiration, code snippets, etc.
+Referencias,etc...
 * [Dash](https://dash.plotly.com/)
 * [Dash Bootstrap](https://dash-bootstrap-components.opensource.faculty.ai/)
 * [readme-template](https://gist.github.com/DomPizzie/7a5ff55ffa9081f2de27c315f5018afc)
