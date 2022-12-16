@@ -5,19 +5,27 @@ import dash_bootstrap_components as dbc
 
 from distribuciones import *
 
+#Estilos de bootstrap
 external_stylesheets = ['https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css']
 
+#Arreglo de los nombres de las distribuciones
 distribuciones = ['Binomial','Poisson','Geometrica','Exponencial','Normal']
 
+#Objeto Dash
 app = Dash(
     __name__,
     meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}],
-    external_stylesheets=external_stylesheets
+    external_stylesheets=external_stylesheets,
+    title="Distribuciones"
 )
 
+app._favicon = ("assets/favicon.ico")
+
+#Se inicializa objeto de las distribuciones
 d = DistribucionFactory()
 
 
+#Bloque del dropdown
 type_distribution = html.Div(
     [
         dbc.Label("Distribución"),
@@ -32,6 +40,7 @@ type_distribution = html.Div(
     ]
 )
 
+#Bloque del switch
 switches = html.Div(
     [
         dbc.Label("Acumulada"),
@@ -42,48 +51,61 @@ switches = html.Div(
     ]
 )
 
+#Bloque de los parametros
 parameters_binomial = html.Div(
     [
         dbc.Label("Parámetros"),
         dbc.Input(id="binom_valor_n", placeholder="valor n", type="number"),
+        html.Br(),
         dbc.Input(id="binom_valor_p", placeholder="valor p", type="number"),
-        dbc.Input(id="binom_valor_x", placeholder="valor x", type="number")
+        html.Br(),
+        dbc.Input(id="binom_valor_x", placeholder="num muestras", type="number")
     ], style= {'display': 'none'}, id='parameters_binomial'
 )
 
+#Bloque de parametros poisson
 parameters_poisson = html.Div(
     [
         dbc.Label("Parámetros"),
         dbc.Input(id="pois_valor_mu", placeholder="valor mu", type="number"),
-        dbc.Input(id="pois_valor_x", placeholder="valor x", type="number")
+        html.Br(),
+        dbc.Input(id="pois_valor_x", placeholder="num muestras", type="number")
     ], style= {'display': 'none'}, id='parameters_poisson'
 )
 
+#Bloque de parametros geometrica
 parameters_geometrica = html.Div(
     [
         dbc.Label("Parámetros"),
         dbc.Input(id="geom_valor_p", placeholder="valor p", type="number"),
-        dbc.Input(id="geom_valor_x", placeholder="valor x", type="number")
+        html.Br(),
+        dbc.Input(id="geom_valor_x", placeholder="num muestras", type="number")
     ], style= {'display': 'none'}, id='parameters_geometrica'
 )
 
+#Bloque de parametros exponencial
 parameters_exponencial = html.Div(
     [
         dbc.Label("Parámetros"),
         dbc.Input(id="exp_valor_alpha", placeholder="valor alpha", type="number"),
-        dbc.Input(id="exp_valor_x", placeholder="valor x", type="number")
+        html.Br(),
+        dbc.Input(id="exp_valor_x", placeholder="num muestras", type="number")
     ], style= {'display': 'none'}, id='parameters_exponencial'
 )
 
+#Bloque de parametros normal
 parameters_normal = html.Div(
     [
         dbc.Label("Parámetros"),
         dbc.Input(id="norm_valor_mu", placeholder="valor mu", type="number"),
+        html.Br(),
         dbc.Input(id="norm_valor_sigma", placeholder="valor sigma", type="number"),
-        dbc.Input(id="norm_valor_x", placeholder="valor x", type="number")
+        html.Br(),
+        dbc.Input(id="norm_valor_x", placeholder="num muestras", type="number")
     ], style= {'display': 'none'}, id='parameters_normal'
 )
 
+#Bloque de botones
 actions_buttons = html.Div(
     [
         dbc.Button("CANCELAR", id="cancel_btn", color="danger", className="me-1", n_clicks=0),
@@ -112,11 +134,12 @@ controls = dbc.Card(
 )
 
 
+#Grafica
 generate_graph = dcc.Graph(
     id='distribution-graph'
 )
 
-#contenedor principal
+#Contenedor principal
 app.layout = dbc.Container(
     [
         html.H1("Distribuciones"),
@@ -134,6 +157,9 @@ app.layout = dbc.Container(
     fluid=True,
 )
 
+#Callback del dropdown
+#oculta los inputs de las distribuciones
+#que no fueron elegidos
 @app.callback(
     Output('parameters_binomial', 'style'),
     Output('parameters_poisson', 'style'),
@@ -157,6 +183,7 @@ def show_hide_element(value):
 
     
 #Callback del boton CANCELAR
+#Limpia todos los inputs
 @app.callback(
     Output('acumulada_switch','value'),
     Output('binom_valor_n','value'),
@@ -181,7 +208,7 @@ def on_cancel_click(n):
         return False,'','','','','','','','','','','',''
 
 #Callback del buton ACEPTAR
-#El output debe ser la grafica
+#El output es la grafica
 @app.callback(
     Output('distribution-graph', 'figure'),
     Input('aceptar_btn', 'n_clicks'),
@@ -209,19 +236,20 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
                     ):
     if n <= 0:
         #Crear un grafico vacio
-        return go.Figure(go.Scatter(x=[0,1,2,0], y=[0,2,0,0], fill="toself"))
+        return go.Figure(go.Scatter(x=[0,0,0,0], y=[0,0,0,0], fill="toself"))
         
     else:
 
-        print(tipo_distribucion)
+        #print(tipo_distribucion)
 
         #en acumulada se deben de sumar la prob actual mas la anterior
         
         if tipo_distribucion == 'Binomial':
-            print(acumulada_switch)
-            print(binom_valor_n)
-            print(binom_valor_p)
-            print(binom_valor_x)
+
+            #print(acumulada_switch)
+            #print(binom_valor_n)
+            #print(binom_valor_p)
+            #print(binom_valor_x)
 
             datos = {}
             datos['n'] = binom_valor_n
@@ -235,9 +263,9 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
 
                         
         elif tipo_distribucion == 'Poisson':
-            print(acumulada_switch)
-            print(pois_valor_mu)
-            print(pois_valor_x)
+            #print(acumulada_switch)
+            #print(pois_valor_mu)
+            #print(pois_valor_x)
             
             datos = {}
             datos['mu'] = pois_valor_mu
@@ -251,8 +279,8 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             
             
         elif tipo_distribucion == 'Geometrica':
-            print(geom_valor_p)
-            print(geom_valor_x)
+            #print(geom_valor_p)
+            #print(geom_valor_x)
 
             datos = {}
             datos['p'] = geom_valor_p
@@ -266,8 +294,8 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             
             
         elif tipo_distribucion == 'Exponencial':
-            print(exp_valor_alpha)
-            print(exp_valor_x)
+            #print(exp_valor_alpha)
+            #print(exp_valor_x)
 
             datos = {}
             datos['alpha'] = exp_valor_alpha
@@ -280,9 +308,9 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
 
                     
         else:
-            print(norm_valor_mu)
-            print(norm_valor_sigma)
-            print(norm_valor_x)
+            #print(norm_valor_mu)
+            #print(norm_valor_sigma)
+            #print(norm_valor_x)
 
             datos = {}
                         
@@ -297,4 +325,4 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
         
         
     
-app.run(host='0.0.0.0', port=8080, debug=True)
+app.run(host='0.0.0.0', port=5001, debug=True)
