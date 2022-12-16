@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 #Constructor clase factory
 d = DistribucionFactory()
 
+
 #datos
 datos = {}
 datos['mu']=4.11
@@ -54,6 +55,36 @@ print(geometrica.get_probability(3))
 
 #Poisson
 #Operaciones correctas
+
+"""
+#Binomial
+datos = {}
+datos['n'] = 100
+datos['p'] = 0.5
+binomial = d.getDistribution("Binomial",datos)
+binomial.get_graph(100,False)
+"""
+"""
+#Poisson
+datos = {}
+datos['mu']=2
+poisson = d.getDistribution("Poisson",datos)
+poisson.get_graph(100,False)
+"""
+"""
+#Exponencial
+datos = {}
+datos['alpha']=2
+exponencial = d.getDistribution("Exponencial",datos)
+exponencial.get_graph(100,True)
+"""
+"""
+#Geometrica
+datos = {}
+datos['p']=0.80
+geometrica = d.getDistribution("Geometrica",datos)
+geometrica.get_graph(100,True)
+
 """
 d_poisson = {}
 d_poisson['mu'] = 6
@@ -73,6 +104,13 @@ sample = pd.DataFrame(exponencial.get_sample(10),columns=["n_gen"])
 
 sample["PDF"]=sample["n_gen"].apply(lambda x: exponencial.get_probability(x))
 
+
 plt.scatter(sample["n_gen"],sample["PDF"])
 #print(exponencial.get_probability(5))
+
+#Normal
+normal = d.getDistribution("Normal",{})
+normal.get_graph(100,3.1400,1.1214,True)
+#print(normal.get_probability(3,4.11,1.37))
+
 
