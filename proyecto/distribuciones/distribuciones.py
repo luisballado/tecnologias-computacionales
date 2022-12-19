@@ -6,8 +6,6 @@ from scipy.integrate import quad
 import matplotlib.pyplot as plt
 import pandas as pd
 
-__author__ = "Luis Ballado"
-
 #Abstract class
 class DISTRIBUCION(ABC):
     
@@ -19,9 +17,11 @@ class DISTRIBUCION(ABC):
     def get_sample(self):
         pass
 
+    """
     @abstractmethod
     def get_graph(self):
         pass
+    """
     
 class Binomial(DISTRIBUCION):
         
@@ -29,7 +29,8 @@ class Binomial(DISTRIBUCION):
         self.n = data['n']
         self.p = data['p']
         self.x = data['x']
-
+        self.acumulada = data['acumulada']
+        
     def get_combinations(self,x=0):
         return (math.factorial(self.n))/(math.factorial(self.n-x)*math.factorial(x))
         
@@ -40,7 +41,9 @@ class Binomial(DISTRIBUCION):
 
     #Aplicamos el método del rechazo
     def get_sample(self, cardinality):
-        sample=[]
+
+        sample = []
+
         for i in range(cardinality):
             u=random.random()
             k=0
@@ -48,11 +51,13 @@ class Binomial(DISTRIBUCION):
             while True:
                 f+=self.get_probability(k)
                 if(f>u):
+                    sample.append(k)
                     break
                 k=k+1
-            sample.append(k)
+            
         return sample
-        
+
+    """
     def get_graph(self,cardinality,scatter):
         sample = pd.DataFrame(self.get_sample(cardinality),columns=['n_gen'])
         sample['pdf'] = sample['n_gen'].apply(lambda x: self.get_probability(x))
@@ -61,11 +66,13 @@ class Binomial(DISTRIBUCION):
         else:
             plt.stem(sample['n_gen'],sample['pdf'])
         plt.savefig('binomial.png')
-        
+    """
+    
 class Poisson(DISTRIBUCION):
     
     def __init__(self,data):
         self.mu = data['mu']
+        self.acumulada = data['acumulada']
         
     def get_probability(self,x):
         e=math.e
@@ -85,6 +92,7 @@ class Poisson(DISTRIBUCION):
                     break
         return sample
     
+    """
     def get_graph(self,cardinality,scatter):
         sample = pd.DataFrame(self.get_sample(cardinality),columns=['n_gen'])
         sample['pdf'] = sample['n_gen'].apply(lambda x: self.get_probability(x))
@@ -93,11 +101,13 @@ class Poisson(DISTRIBUCION):
         else:
             plt.stem(sample['n_gen'],sample['pdf'])
         plt.savefig('poisson.png')
-        
+    """
+    
 class Geometrica(DISTRIBUCION):
     def __init__(self,data):
         self.p = data['p']
-
+        self.acumulada = data['acumulada']
+        
     def get_probability(self,x):
         return ((1-self.p)**x)*self.p
 
@@ -113,6 +123,7 @@ class Geometrica(DISTRIBUCION):
                     break
         return sample
 
+    """
     def get_graph(self,cardinality,scatter):
         sample = pd.DataFrame(self.get_sample(cardinality),columns=['n_gen'])
         sample['pdf'] = sample['n_gen'].apply(lambda x: self.get_probability(x))
@@ -121,11 +132,13 @@ class Geometrica(DISTRIBUCION):
         else:
             plt.stem(sample['n_gen'],sample['pdf'])
         plt.savefig('geometrica.png')
-            
+    """
+    
 class Exponencial(DISTRIBUCION):
     def __init__(self,data):
         self.alpha = data['alpha']
-
+        self.acumulada = data['acumulada']
+        
     def get_probability(self,x):
         return self.alpha*math.exp(-self.alpha*x)
     
@@ -141,6 +154,7 @@ class Exponencial(DISTRIBUCION):
                     break
         return sample
 
+    """
     def get_graph(self,cardinality,scatter):
         sample = pd.DataFrame(self.get_sample(cardinality),columns=['n_gen'])
         sample['pdf'] = sample['n_gen'].apply(lambda x: self.get_probability(x))
@@ -149,10 +163,13 @@ class Exponencial(DISTRIBUCION):
         else:
             plt.stem(sample['n_gen'],sample['pdf'])
         plt.savefig('exponencial.png')
-                
+    """
+    
 class Normal(DISTRIBUCION):
     def __init__(self,data):
-        pass
+        self.mu = data['mu']
+        self.sigma = data['sigma']
+        self.acumulada = data['acumulada']
     
     #Ojo esta es función es la normal estandarizada    
     def get_distribution(self, z):
@@ -160,25 +177,26 @@ class Normal(DISTRIBUCION):
         exp=np.exp(-0.5*pow((z),2))
         return (coef*exp)  
     
-    def get_probability(self,x,mu,sigma):
-        z=(x-mu)/sigma
+    def get_probability(self,x):
+        z=(x-self.mu)/self.sigma
         p=quad(self.get_distribution,np.NINF, z)
         return p[0]
     
     #Aplicamos el método del rechazo
-    def get_sample(self, cardinality, mu,sigma):
+    def get_sample(self, cardinality):
         sample=[]
         for i in range(cardinality):
             while True:
                 u=random.random()
                 fu=random.random()
-                z=(u-mu)/sigma
+                z=(u-self.mu)/self.sigma
                 fz=self.get_distribution(z)
                 if(fu<=fz):
                     sample.append(u)
                     break
         return sample
 
+    """
     def get_graph(self,cardinality,mu,sigma,scatter):
         sample = pd.DataFrame(self.get_sample(cardinality,mu,sigma),columns=['n_gen'])
         sample['pdf'] = sample['n_gen'].apply(lambda x: self.get_distribution(x))
@@ -187,7 +205,8 @@ class Normal(DISTRIBUCION):
         else:
             plt.stem(sample['n_gen'],sample['pdf'])
         plt.savefig('gausiana.png')
-        
+    """
+    
 class DistribucionFactory:
 
     def __init__(self):
