@@ -161,20 +161,7 @@ def texto(distribucion,acumulada):
 
         else:
             texto = """
-            ##
-            ## Distribución Normal (ACUMULADA)
-
-            La función de distribución acumulada, se denota por la letra griega $$\Phi$$
-            Forma de calcularlo
-            $$
-            \Phi (x) = \\frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{x} \! e^{\\frac{-t^2}{2}} dt
-            $$
-
-            Existen muchas aproximaciones numericas para una distribución normal generica con densidad , media, desviación estándar. 
-
-            $$
-            F(x) = \\frac{1}{2} \left[ 1+erf(\\frac{x-\mu}{\sigma \sqrt{2}})\right]
-            $$
+            
             
             """
             
