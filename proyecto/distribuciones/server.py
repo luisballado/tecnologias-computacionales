@@ -384,7 +384,6 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
         )
         
         return fig,texto(tipo_distribucion,acumulada_switch)
-        #return go.Figure(data=[go.Scatter(x=df['n_gen'],y=df['pdf'],mode="markers")]),texto(tipo_distribucion,acumulada_switch)
-
+    
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=False)
