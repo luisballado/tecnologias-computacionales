@@ -28,10 +28,10 @@ def texto(distribucion,acumulada):
             ##
             ## Distribución Binomial (ACUMULADA)
             
-            Para una variable aleatoria, la función de distribución acumulativa está definida por:
+            También puede ser expresada en términos de la función beta incompleta como:
             
             $$
-            
+            I_{1-p}(n-x,x+1) = (n-x)\\binom{n}{x}\int_{0}^{1-p} \! t^{n-x-1} (1-t)^x dt
             $$
                         
             """
@@ -51,9 +51,9 @@ def texto(distribucion,acumulada):
             $$
 
             Donde:
-            * \lambda -
+            * $$\lambda$$ -
             * e - número de euler
-            * x -  
+            * x -
             
             """
 
@@ -62,18 +62,11 @@ def texto(distribucion,acumulada):
             ##
             ## Distribución Exponencial (ACUMULADA)
             
-            La distribución exponencial suele referirse a la cantidad de tiempo que transcurre hasta que se produce algún evento específico. Por ejemplo, la cantidad de tiempo (que comienza ahora) hasta que se produzca un terremoto tiene una distribución exponencial.
-
             Forma de calcularlo
             $$
-            \lambda e^{-\lambda x}
+            1- e^{-\lambda x}
             $$
-
-            Donde:
-            * \lambda -
-            * e - número de euler
-            * x -  
-            
+                        
             """
 
     elif distribucion == 'Poisson':
@@ -91,9 +84,8 @@ def texto(distribucion,acumulada):
             $$
 
             Donde:
-            * n -
-            * k -
-            * p -
+            * k - es el número de ocurrencias del evento
+            * $$\lambda$$ - número de veces que se espera que ocurra dicho evento 
             
             """
 
@@ -103,18 +95,14 @@ def texto(distribucion,acumulada):
             ##
             ## Distribución Poisson (ACUMULADA)
             
-            La suma de variables aleatorias de Poisson independientes es otra variable
-            aleatoria de Poisson cuyo parámetro es la suma de los parámetros de las
-            originales. Dicho de otra manera, si
-
             $$
-            X_{i}
+            X_{i} \sim Poisson(\lambda_{i}), i = 1, \ldots, N 
             $$
             
             son N variables aleatorias de Poisson independientes, entonces
             
             $$
-            \\frac{\lambda ^{k} e^{-\lambda}}{k!}
+            \sum_{i=1}^N = \lambda_{i}
             $$
 
             """
@@ -147,13 +135,9 @@ def texto(distribucion,acumulada):
             
             Forma de calcularlo
             $$
-            p*(1-p)^{x-1}
+            1-(1-p)^{x-1}
             $$
-
-            Donde:
-            * p -
-            * x -
-            
+                        
             """
 
     else:
@@ -165,13 +149,13 @@ def texto(distribucion,acumulada):
             
             Forma de calcularlo
             $$
-            \\frac{1}{\sigma \sqrt{2 \pi} } e^{-\\frac{(x-\mu)}{\sigma}}
+            \\frac{1}{\sigma \sqrt{2 \pi} } e^{-\\frac{(x-\mu)^{2}}{\sigma^{2}}}
             $$
             
             Donde:
             * x -
-            * \sigma -
-            * \mu -
+            * $$\sigma$$ -
+            * $$\mu$$ -
             
             """
 
@@ -179,16 +163,18 @@ def texto(distribucion,acumulada):
             texto = """
             ##
             ## Distribución Normal (ACUMULADA)
-            
+
+            La función de distribución acumulada, se denota por la letra griega $$\Phi$$
             Forma de calcularlo
             $$
-            \\frac{1}{\sigma \sqrt{2 \pi} } e^{-\\frac{(x-\mu)}{\sigma}}
+            \Phi (x) = \\frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{x} \! e^{\\frac{-t^2}{2}} dt
             $$
-            
-            Donde:
-            * x -
-            * \sigma -
-            * \mu -
+
+            Existen muchas aproximaciones numericas para una distribución normal generica con densidad , media, desviación estándar. 
+
+            $$
+            F(x) = \\frac{1}{2} \left[ 1+erf(\\frac{x-\mu}{\sigma \sqrt{2}})\right]
+            $$
             
             """
             

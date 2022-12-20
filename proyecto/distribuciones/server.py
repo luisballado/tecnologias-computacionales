@@ -275,18 +275,17 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
 
             binomial = d.getDistribution("Binomial",datos)
 
+            x_axis = "Numero de pruebas"
+            y_axis = "Probabilidad de exito"
+            
             # Crear DataFrame
             if not acumulada_switch:
                 df = pd.DataFrame(binomial.get_sample(binom_valor_x),columns=['n_gen'])
                 df['pdf'] = df['n_gen'].apply(lambda x: binomial.get_probability(x))
-                x_axis = "X_AXIS"
-                y_axis = "Y_AXIS"
             else:
                 df = pd.DataFrame(binomial.get_sample(binom_valor_x),columns=['n_gen'])
                 df['pdf'] = df['n_gen'].apply(lambda x: binomial.get_probability_cdf(x))
-                x_axis = "X_AXIS"
-                y_axis = "Y_AXIS"
-                
+                                
         elif tipo_distribucion == 'Poisson':
             
             datos = {}
@@ -296,18 +295,17 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             
             poisson = d.getDistribution("Poisson",datos)
 
+            x_axis = "Numero de ocurrencias"
+            y_axis = "Probabilidad de exito"
+            
             # Crear DataFrame
             if not acumulada_switch:
                 df = pd.DataFrame(poisson.get_sample(pois_valor_x),columns=['n_gen'])
                 df['pdf'] = df['n_gen'].apply(lambda x: poisson.get_probability(x))
-                x_axis = "X_AXIS"
-                y_axis = "Y_AXIS"
             else:
                 df = pd.DataFrame(poisson.get_sample(pois_valor_x),columns=['n_gen'])
                 df['pdf'] = df['n_gen'].apply(lambda x: poisson.get_probability_cdf(x))
-                x_axis = "X_AXIS"
-                y_axis = "Y_AXIS"
-                
+                                
         elif tipo_distribucion == 'Geometrica':
 
             datos = {}
@@ -317,18 +315,18 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             
             geometrica = d.getDistribution("Geometrica",datos)
 
+            x_axis = "Numero de fallas"
+            y_axis = "Probabilidad de exito"
+            
             # Crear DataFrame
             if not acumulada_switch:
                 df = pd.DataFrame(geometrica.get_sample(geom_valor_x),columns=['n_gen'])
                 df['pdf'] = df['n_gen'].apply(lambda x: geometrica.get_probability(x))
-                x_axis = "X_AXIS"
-                y_axis = "Y_AXIS"
+                
             else:
                 df = pd.DataFrame(geometrica.get_sample(geom_valor_x),columns=['n_gen'])
                 df['pdf'] = df['n_gen'].apply(lambda x: geometrica.get_probability_cdf(x))
-                x_axis = "X_AXIS"
-                y_axis = "Y_AXIS"
-                
+                                
         elif tipo_distribucion == 'Exponencial':
 
             datos = {}
@@ -338,16 +336,15 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             
             exponencial = d.getDistribution("Exponencial",datos)
 
+            x_axis = "x"
+            y_axis = "Probabilidad"
+            
             if not acumulada_switch:
                 df = pd.DataFrame(exponencial.get_sample(exp_valor_x),columns=['n_gen'])
                 df['pdf'] = df['n_gen'].apply(lambda x: exponencial.get_probability(x))
-                x_axis = "X_AXIS"
-                y_axis = "Y_AXIS"
             else:
                 df = pd.DataFrame(exponencial.get_sample(exp_valor_x),columns=['n_gen'])
                 df['pdf'] = df['n_gen'].apply(lambda x: exponencial.get_probability_cdf(x))
-                x_axis = "X_AXIS"
-                y_axis = "Y_AXIS"
         else:
 
             datos = {}
@@ -358,17 +355,17 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             # Crear objeto distribucion normal
             normal = d.getDistribution("Normal",datos)
 
+            x_axis = "x"
+            y_axis = "Probabilidad"
+            
             if not acumulada_switch:
                 df = pd.DataFrame(normal.get_sample(norm_valor_x),columns=['n_gen'])
                 df['pdf'] = df['n_gen'].apply(lambda x: normal.get_probability(x))
-                x_axis = "X_AXIS"
-                y_axis = "Y_AXIS"
+                
             else:
                 df = pd.DataFrame(normal.get_sample(norm_valor_x),columns=['n_gen'])
                 df['pdf'] = df['n_gen'].apply(lambda x: normal.get_probability_cdf(x))
-                x_axis = "X_AXIS"
-                y_axis = "Y_AXIS"
-                
+                                
         # Regresar grafico de respuesta
         fig = go.Figure()
         fig.add_trace(go.Scatter(
