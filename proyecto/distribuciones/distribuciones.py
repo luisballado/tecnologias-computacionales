@@ -4,7 +4,6 @@ import numpy as np
 import random
 from scipy.integrate import quad
 import scipy.special as sc
-import matplotlib.pyplot as plt
 import pandas as pd
 
 #Abstract class

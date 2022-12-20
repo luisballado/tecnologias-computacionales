@@ -15,47 +15,27 @@ El proyecto cuenta con tres archivos:
 * server.py - Servidor para la visualización de la información con uso de Dash
 * textos_distribuciones.py - Función para englobar los textos que se incluyen en el proyecto
 
-### Dependencies
+### Dependencias
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+* python >=3.10
+* dash >=1.13.3
+* pandas >=1.0.5
+* scipy >= 1.9.3
+* dash_bootstrap_components >= 1.2.1
 
-### Installing
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+### Correr programa
 
-### Executing program
-
-* How to run the program
-* Step-by-step bullets
 ```
-code blocks for commands
-```
-
-## Help
-
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
+python server.py
 ```
 
 ## Authors
 
-Contributors names and contact info
+Luis Ballado
+David Cervantes
 
-ex. Luis Ballado
-
-## Version History
-
-* 0.1
-    * Initial Release
-
-## License
-
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
-
-## Acknowledgments
+## Referencias
 
 Referencias,etc...
 * [Dash](https://dash.plotly.com/)
