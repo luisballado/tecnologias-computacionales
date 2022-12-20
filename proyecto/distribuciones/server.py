@@ -279,10 +279,14 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             if not acumulada_switch:
                 df = pd.DataFrame(binomial.get_sample(binom_valor_x),columns=['n_gen'])
                 df['pdf'] = df['n_gen'].apply(lambda x: binomial.get_probability(x))
+                x_axis = "X_AXIS"
+                y_axis = "Y_AXIS"
             else:
                 df = pd.DataFrame(binomial.get_sample(binom_valor_x),columns=['n_gen'])
                 df['pdf'] = df['n_gen'].apply(lambda x: binomial.get_probability_cdf(x))
-                        
+                x_axis = "X_AXIS"
+                y_axis = "Y_AXIS"
+                
         elif tipo_distribucion == 'Poisson':
             
             datos = {}
@@ -296,10 +300,14 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             if not acumulada_switch:
                 df = pd.DataFrame(poisson.get_sample(pois_valor_x),columns=['n_gen'])
                 df['pdf'] = df['n_gen'].apply(lambda x: poisson.get_probability(x))
+                x_axis = "X_AXIS"
+                y_axis = "Y_AXIS"
             else:
                 df = pd.DataFrame(poisson.get_sample(pois_valor_x),columns=['n_gen'])
                 df['pdf'] = df['n_gen'].apply(lambda x: poisson.get_probability_cdf(x))
-            
+                x_axis = "X_AXIS"
+                y_axis = "Y_AXIS"
+                
         elif tipo_distribucion == 'Geometrica':
 
             datos = {}
@@ -313,10 +321,14 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             if not acumulada_switch:
                 df = pd.DataFrame(geometrica.get_sample(geom_valor_x),columns=['n_gen'])
                 df['pdf'] = df['n_gen'].apply(lambda x: geometrica.get_probability(x))
+                x_axis = "X_AXIS"
+                y_axis = "Y_AXIS"
             else:
                 df = pd.DataFrame(geometrica.get_sample(geom_valor_x),columns=['n_gen'])
                 df['pdf'] = df['n_gen'].apply(lambda x: geometrica.get_probability_cdf(x))
-                        
+                x_axis = "X_AXIS"
+                y_axis = "Y_AXIS"
+                
         elif tipo_distribucion == 'Exponencial':
 
             datos = {}
@@ -329,9 +341,13 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             if not acumulada_switch:
                 df = pd.DataFrame(exponencial.get_sample(exp_valor_x),columns=['n_gen'])
                 df['pdf'] = df['n_gen'].apply(lambda x: exponencial.get_probability(x))
+                x_axis = "X_AXIS"
+                y_axis = "Y_AXIS"
             else:
                 df = pd.DataFrame(exponencial.get_sample(exp_valor_x),columns=['n_gen'])
                 df['pdf'] = df['n_gen'].apply(lambda x: exponencial.get_probability_cdf(x))
+                x_axis = "X_AXIS"
+                y_axis = "Y_AXIS"
         else:
 
             datos = {}
@@ -345,12 +361,30 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             if not acumulada_switch:
                 df = pd.DataFrame(normal.get_sample(norm_valor_x),columns=['n_gen'])
                 df['pdf'] = df['n_gen'].apply(lambda x: normal.get_probability(x))
+                x_axis = "X_AXIS"
+                y_axis = "Y_AXIS"
             else:
                 df = pd.DataFrame(normal.get_sample(norm_valor_x),columns=['n_gen'])
                 df['pdf'] = df['n_gen'].apply(lambda x: normal.get_probability_cdf(x))
-            
+                x_axis = "X_AXIS"
+                y_axis = "Y_AXIS"
+                
         # Regresar grafico de respuesta
-        return go.Figure(data=[go.Scatter(x=df['n_gen'],y=df['pdf'],mode="markers")]),texto(tipo_distribucion,acumulada_switch)
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(
+            x=df['n_gen'],
+            y=df['pdf'],
+            mode="markers"
+        ))
+
+        fig.update_layout(
+            title=tipo_distribucion,
+            xaxis_title = x_axis,
+            yaxis_title = y_axis
+        )
+        
+        return fig,texto(tipo_distribucion,acumulada_switch)
+        #return go.Figure(data=[go.Scatter(x=df['n_gen'],y=df['pdf'],mode="markers")]),texto(tipo_distribucion,acumulada_switch)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=False)

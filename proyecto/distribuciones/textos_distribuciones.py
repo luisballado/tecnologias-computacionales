@@ -8,19 +8,19 @@ def texto(distribucion,acumulada):
             ##
             ## Distribución Binomial
             
-            La distribución de probabilidad binomial es una distribución discreta.
+            La distribución binomial se entiende como una serie de pruebas o ensayos
+            en la que solo podemos tener 2 resultados (éxito o fracaso), siendo el éxito
+            nuestra variable aleatoria.
             
-            Se asocia con un experimento de múltiples pasos que se llama experimento binomial.
-
             Forma de calcularlo
             $$
             \\binom{n}{k}*{p}*(1-p)^{n-k}
             $$
 
             Donde:
-            * n -
-            * k -
-            * p - 
+            * n - Número de ensayos/experimentos
+            * k - Número de éxitos
+            * p - Probabilidad de éxito
             
             """
         else:
@@ -28,20 +28,12 @@ def texto(distribucion,acumulada):
             ##
             ## Distribución Binomial (ACUMULADA)
             
-            La distribución de probabilidad binomial es una distribución discreta.
+            Para una variable aleatoria, la función de distribución acumulativa está definida por:
             
-            Se asocia con un experimento de múltiples pasos que se llama experimento binomial.
-
-            Forma de calcularlo
             $$
-            \\binom{n}{k}*{p}*(1-p)^{n-k}
-            $$
-
-            Donde:
-            * n -
-            * k -
-            * p - 
             
+            $$
+                        
             """
 
     elif distribucion == 'Exponencial':
@@ -111,18 +103,20 @@ def texto(distribucion,acumulada):
             ##
             ## Distribución Poisson (ACUMULADA)
             
-            La distribución de Poisson es una distribución de probabilidad discreta que expresa, a partir de una frecuencia de ocurrencia media, la probabilidad de que ocurra un determinado número de eventos durante cierto período de tiempo. Concretamente, se especializa en la probabilidad de ocurrencia de sucesos con probabilidades muy pequeñas, o sucesos raros. 
+            La suma de variables aleatorias de Poisson independientes es otra variable
+            aleatoria de Poisson cuyo parámetro es la suma de los parámetros de las
+            originales. Dicho de otra manera, si
 
-            Forma de calcularlo
+            $$
+            X_{i}
+            $$
+            
+            son N variables aleatorias de Poisson independientes, entonces
+            
             $$
             \\frac{\lambda ^{k} e^{-\lambda}}{k!}
             $$
 
-            Donde:
-            * n -
-            * k -
-            * p -
-            
             """
             
     elif distribucion == 'Geometrica':
@@ -132,9 +126,12 @@ def texto(distribucion,acumulada):
             ##
             ## Distribución Geometrica
             
+            La distribución geométrica es un modelo adecuado para aquellos procesos en los
+            que se repiten pruebas hasta la consecución del éxito a resultado deseado.
+
             Forma de calcularlo
             $$
-            p*(1-p)^{x-1}
+            P(X=x) = p*(1-p)^{x-1}
             $$
 
             Donde:
