@@ -66,7 +66,7 @@ class Poisson(DISTRIBUCION):
         
     def get_probability(self,x):
         e=math.e
-        return (self.mu**x)*(e**(-1*self.mu))/(math.factorial(x))
+        return (self.mu**x)*(math.exp(-self.mu))/(math.factorial(x))
 
     #Aplicamos el método del rechazo
     def get_sample(self, cardinality):
@@ -140,13 +140,18 @@ class Normal(DISTRIBUCION):
     #Ojo esta es función es la normal estandarizada    
     def get_distribution(self, z):
         coef=1/(math.sqrt(2*(math.pi)))
-        exp=np.exp(-0.5*pow((z),2))
+        exp=math.exp(-0.5*pow((z),2))
         return (coef*exp)  
-    
+
+    """
     def get_probability(self,x):
         z=(x-self.mu)/self.sigma
         p=quad(self.get_distribution,np.NINF, z)
         return p[0]
+    """
+    
+    def get_probability(self,x):
+        return (1/(self.sigma*math.sqrt(math.pi*2)))*math.exp(-0.5*(((x-self.mu)/self.sigma)**2)) 
     
     #Aplicamos el método del rechazo
     def get_sample(self, cardinality):
@@ -155,7 +160,7 @@ class Normal(DISTRIBUCION):
             while True:
                 u=random.uniform(-5,5)
                 fu=random.uniform(-5,5)
-                fz=self.get_distribution(u)
+                fz=self.get_probability(u)
                 if(fu<=fz):
                     sample.append(u)
                     break

@@ -17,20 +17,19 @@ app = Dash(
     __name__,
     meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}],
     external_stylesheets=external_stylesheets,
-    #external_stylesheets=external_stylesheets,
     title="Distribuciones"
 )
 
 # Poner un favicon
 app._favicon = ("assets/favicon.ico")
 
-# Se inicializa objeto de las distribuciones
+# Se inicializa objeto abstracto de las distribuciones
 d = DistribucionFactory()
 
 # Bloque del dropdown
 type_distribution = html.Div(
     [
-        dbc.Label("Distribución"),
+        dbc.Label("Distribución -"),
         html.I(className="bi bi-info-circle-fill me-2", id="distribucion_tooltip"),
         dcc.Dropdown(
             id="tipo_distribucion",
@@ -39,20 +38,20 @@ type_distribution = html.Div(
             ],
             value="Binomial",
         ),
-        dbc.Tooltip("Acumuladaaaaa", target="distribucion_tooltip")
+        dbc.Tooltip("Selecciona un tipo de distribucion", target="distribucion_tooltip")
     ]
 )
 
 # Bloque del switch
 switches = html.Div(
     [
-        dbc.Label("Acumulada"),
+        dbc.Label("Acumulada -"),
         html.I(className="bi bi-info-circle-fill me-2", id="acumulada_tooltip"),
         dbc.Switch(
             id="acumulada_switch",
             value=False,
         ),
-        dbc.Tooltip("Acumuladaaa", target="acumulada_tooltip")
+        dbc.Tooltip("Calcular la versión de probabilidad acumulada", target="acumulada_tooltip")
     ]
 )
 
@@ -60,11 +59,13 @@ switches = html.Div(
 parameters_binomial = html.Div(
     [
         dbc.Label("Parámetros"),
-        dbc.Input(id="binom_valor_n", placeholder="valor n", type="number"),
+        dbc.Input(id="binom_valor_n", placeholder="número de pruebas", type="number"),
         html.Br(),
-        dbc.Input(id="binom_valor_p", placeholder="valor p", type="number"),
+        dbc.Input(id="binom_valor_p", placeholder="probabilidad de éxitos [0-1]", type="number"),
         html.Br(),
-        dbc.Input(id="binom_valor_x", placeholder="num muestras", type="number"),
+        html.Hr(),
+        dbc.Label("Generar Valores para Graficar"),
+        dbc.Input(id="binom_valor_x", placeholder="cardinalidad", type="number"),
     ], style= {'display': 'none'}, id='parameters_binomial'
 )
 
@@ -72,9 +73,11 @@ parameters_binomial = html.Div(
 parameters_poisson = html.Div(
     [
         dbc.Label("Parámetros"),
-        dbc.Input(id="pois_valor_mu", placeholder="valor mu", type="number"),
+        dbc.Input(id="pois_valor_mu", placeholder="número de ocurrencias esperadas > 0", type="number"),
         html.Br(),
-        dbc.Input(id="pois_valor_x", placeholder="num muestras", type="number")
+        html.Hr(),
+        dbc.Label("Generar Valores para Graficar"),
+        dbc.Input(id="pois_valor_x", placeholder="cardinalidad", type="number")
     ], style= {'display': 'none'}, id='parameters_poisson'
 )
 
@@ -82,9 +85,11 @@ parameters_poisson = html.Div(
 parameters_geometrica = html.Div(
     [
         dbc.Label("Parámetros"),
-        dbc.Input(id="geom_valor_p", placeholder="valor p", type="number"),
+        dbc.Input(id="geom_valor_p", placeholder="probabilidad de éxito [0-1]", type="number"),
         html.Br(),
-        dbc.Input(id="geom_valor_x", placeholder="num muestras", type="number")
+        html.Hr(),
+        dbc.Label("Generar Valores para Graficar"),
+        dbc.Input(id="geom_valor_x", placeholder="cardinalidad", type="number")
     ], style= {'display': 'none'}, id='parameters_geometrica'
 )
 
@@ -92,9 +97,11 @@ parameters_geometrica = html.Div(
 parameters_exponencial = html.Div(
     [
         dbc.Label("Parámetros"),
-        dbc.Input(id="exp_valor_alpha", placeholder="valor alpha", type="number"),
+        dbc.Input(id="exp_valor_alpha", placeholder="tasa de ocurrencia del evento > 0", type="number"),
         html.Br(),
-        dbc.Input(id="exp_valor_x", placeholder="num muestras", type="number")
+        html.Hr(),
+        dbc.Label("Generar Valores para Graficar"),
+        dbc.Input(id="exp_valor_x", placeholder="cardinalidad", type="number")
     ], style= {'display': 'none'}, id='parameters_exponencial'
 )
 
@@ -102,11 +109,13 @@ parameters_exponencial = html.Div(
 parameters_normal = html.Div(
     [
         dbc.Label("Parámetros"),
-        dbc.Input(id="norm_valor_mu", placeholder="valor mu", type="number"),
+        dbc.Input(id="norm_valor_mu", placeholder="media de distribución", type="number"),
         html.Br(),
-        dbc.Input(id="norm_valor_sigma", placeholder="valor sigma", type="number"),
+        dbc.Input(id="norm_valor_sigma", placeholder="desviación estándar de la distribución > 0", type="number"),
         html.Br(),
-        dbc.Input(id="norm_valor_x", placeholder="num muestras", type="number")
+        html.Hr(),
+        dbc.Label("Generar Valores para Graficar"),
+        dbc.Input(id="norm_valor_x", placeholder="cardinalidad", type="number")
     ], style= {'display': 'none'}, id='parameters_normal'
 )
 
@@ -146,10 +155,9 @@ generate_graph = dcc.Graph(
 
 # Bloque de texto
 _latex_ = dcc.Markdown(
-    children = ''' '''
-    , mathjax=True,id='latex_text')
-
-
+    children = ''' ''',
+    mathjax=True,id='latex_text'
+)
 
 # Contenedor principal
 app.layout = dbc.Container(
@@ -168,7 +176,6 @@ app.layout = dbc.Container(
         html.Hr(),
         html.Br(),
         _latex_
-        
     ],
     fluid=True,
 )
@@ -197,8 +204,8 @@ def show_hide_element(value):
     else:
         return {'display':'none'},{'display':'none'},{'display':'none'},{'display':'none'},{'display':'none'}
 
-#Callback del boton CANCELAR
-#Limpia todos los inputs
+# Callback del boton CANCELAR
+# Limpia todos los inputs
 @app.callback(
     Output('acumulada_switch','value'),
     Output('binom_valor_n','value'),
@@ -221,8 +228,8 @@ def on_cancel_click(n):
     else:
         return False,'','','','','','','','','','','',''
 
-#Callback del buton ACEPTAR
-#El output es la grafica
+# Callback del buton ACEPTAR
+# El output es la grafica
 @app.callback(
     Output('distribution-graph', 'figure'),
     Output('latex_text', 'children'),
@@ -267,7 +274,8 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             datos['acumulada'] = acumulada_switch
 
             binomial = d.getDistribution("Binomial",datos)
-            
+
+            # Crear DataFrame
             if not acumulada_switch:
                 df = pd.DataFrame(binomial.get_sample(binom_valor_x),columns=['n_gen'])
                 df['pdf'] = df['n_gen'].apply(lambda x: binomial.get_probability(x))
@@ -283,7 +291,8 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             datos['acumulada'] = acumulada_switch
             
             poisson = d.getDistribution("Poisson",datos)
-            
+
+            # Crear DataFrame
             if not acumulada_switch:
                 df = pd.DataFrame(poisson.get_sample(pois_valor_x),columns=['n_gen'])
                 df['pdf'] = df['n_gen'].apply(lambda x: poisson.get_probability(x))
@@ -300,6 +309,7 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             
             geometrica = d.getDistribution("Geometrica",datos)
 
+            # Crear DataFrame
             if not acumulada_switch:
                 df = pd.DataFrame(geometrica.get_sample(geom_valor_x),columns=['n_gen'])
                 df['pdf'] = df['n_gen'].apply(lambda x: geometrica.get_probability(x))
@@ -325,8 +335,8 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
         else:
 
             datos = {}
-            datos['mu'] = norm_valor_mu
-            datos['sigma'] = norm_valor_sigma
+            datos['mu'] = float(norm_valor_mu)
+            datos['sigma'] = float(norm_valor_sigma)
             datos['acumulada'] = acumulada_switch
             
             # Crear objeto distribucion normal
@@ -334,12 +344,13 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
 
             if not acumulada_switch:
                 df = pd.DataFrame(normal.get_sample(norm_valor_x),columns=['n_gen'])
-                df['pdf'] = df['n_gen'].apply(lambda x: normal.get_distribution(x))
+                df['pdf'] = df['n_gen'].apply(lambda x: normal.get_probability(x))
             else:
                 df = pd.DataFrame(normal.get_sample(norm_valor_x),columns=['n_gen'])
                 df['pdf'] = df['n_gen'].apply(lambda x: normal.get_probability_cdf(x))
             
         # Regresar grafico de respuesta
         return go.Figure(data=[go.Scatter(x=df['n_gen'],y=df['pdf'],mode="markers")]),texto(tipo_distribucion,acumulada_switch)
-        
-app.run(host='0.0.0.0', port=5001, debug=True)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5001, debug=False)
