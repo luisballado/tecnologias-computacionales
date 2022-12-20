@@ -6,8 +6,8 @@ import dash_bootstrap_components as dbc
 from textos_distribuciones import texto
 from distribuciones import *
 
-# Importar Estilos de Bootstrap
-#external_stylesheets = ['https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css']
+# Importar Estilos de Bootstrap ['https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css']
+external_stylesheets = [dbc.themes.BOOTSTRAP, dbc.icons.BOOTSTRAP]
 
 # Arreglo de los nombres de las distribuciones
 distribuciones = ['Binomial','Poisson','Geometrica','Exponencial','Normal']
@@ -16,7 +16,7 @@ distribuciones = ['Binomial','Poisson','Geometrica','Exponencial','Normal']
 app = Dash(
     __name__,
     meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}],
-    external_stylesheets=[dbc.themes.BOOTSTRAP, dbc.icons.BOOTSTRAP],
+    external_stylesheets=external_stylesheets,
     #external_stylesheets=external_stylesheets,
     title="Distribuciones"
 )
@@ -78,7 +78,7 @@ parameters_poisson = html.Div(
     ], style= {'display': 'none'}, id='parameters_poisson'
 )
 
-#Bloque de parametros geometrica
+# Bloque de parametros geometrica
 parameters_geometrica = html.Div(
     [
         dbc.Label("Parámetros"),
@@ -88,7 +88,7 @@ parameters_geometrica = html.Div(
     ], style= {'display': 'none'}, id='parameters_geometrica'
 )
 
-#Bloque de parametros exponencial
+# Bloque de parametros exponencial
 parameters_exponencial = html.Div(
     [
         dbc.Label("Parámetros"),
@@ -98,7 +98,7 @@ parameters_exponencial = html.Div(
     ], style= {'display': 'none'}, id='parameters_exponencial'
 )
 
-#Bloque de parametros normal
+# Bloque de parametros normal
 parameters_normal = html.Div(
     [
         dbc.Label("Parámetros"),
@@ -110,7 +110,7 @@ parameters_normal = html.Div(
     ], style= {'display': 'none'}, id='parameters_normal'
 )
 
-#Bloque de botones
+# Bloque de botones
 actions_buttons = html.Div(
     [
         dbc.Button("CANCELAR", id="cancel_btn", color="danger", className="me-1", n_clicks=0),
@@ -120,7 +120,7 @@ actions_buttons = html.Div(
     className="d-grid gap-2 d-md-flex justify-content-md-center",
 )
 
-#Tarjeta con todos los elementos
+# Tarjeta con todos los elementos
 controls = dbc.Card(
     [
         type_distribution,
@@ -138,20 +138,20 @@ controls = dbc.Card(
     body=True,
 )
 
-
-#Grafica
+# Grafica
 generate_graph = dcc.Graph(
     id='distribution-graph',
     mathjax=True
 )
 
+# Bloque de texto
 _latex_ = dcc.Markdown(
     children = ''' '''
     , mathjax=True,id='latex_text')
 
 
 
-#Contenedor principal
+# Contenedor principal
 app.layout = dbc.Container(
     [
         html.H1("Distribuciones"),
@@ -197,7 +197,6 @@ def show_hide_element(value):
     else:
         return {'display':'none'},{'display':'none'},{'display':'none'},{'display':'none'},{'display':'none'}
 
-    
 #Callback del boton CANCELAR
 #Limpia todos los inputs
 @app.callback(
@@ -251,13 +250,13 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
                     norm_valor_mu,norm_valor_sigma,norm_valor_x
                     ):
     if n <= 0:
-        #Crear un grafico vacio
+        # Crear un grafico vacio
         text = ''''''
         return go.Figure(go.Scatter(x=[0], y=[0], fill="toself")),text
     
     else:
         
-        #en acumulada se deben de sumar la prob actual mas la anterior
+        # en acumulada se deben de sumar la prob actual mas la anterior
         
         if tipo_distribucion == 'Binomial':
             
@@ -269,9 +268,12 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
 
             binomial = d.getDistribution("Binomial",datos)
             
-            df = pd.DataFrame(binomial.get_sample(binom_valor_x),columns=['n_gen'])
-            df['pdf'] = df['n_gen'].apply(lambda x: binomial.get_probability(x))
-
+            if not acumulada_switch:
+                df = pd.DataFrame(binomial.get_sample(binom_valor_x),columns=['n_gen'])
+                df['pdf'] = df['n_gen'].apply(lambda x: binomial.get_probability(x))
+            else:
+                df = pd.DataFrame(binomial.get_sample(binom_valor_x),columns=['n_gen'])
+                df['pdf'] = df['n_gen'].apply(lambda x: binomial.get_probability_cdf(x))
                         
         elif tipo_distribucion == 'Poisson':
             
@@ -282,8 +284,12 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             
             poisson = d.getDistribution("Poisson",datos)
             
-            df = pd.DataFrame(poisson.get_sample(pois_valor_x),columns=['n_gen'])
-            df['pdf'] = df['n_gen'].apply(lambda x: poisson.get_probability(x))
+            if not acumulada_switch:
+                df = pd.DataFrame(poisson.get_sample(pois_valor_x),columns=['n_gen'])
+                df['pdf'] = df['n_gen'].apply(lambda x: poisson.get_probability(x))
+            else:
+                df = pd.DataFrame(poisson.get_sample(pois_valor_x),columns=['n_gen'])
+                df['pdf'] = df['n_gen'].apply(lambda x: poisson.get_probability_cdf(x))
             
         elif tipo_distribucion == 'Geometrica':
 
@@ -293,10 +299,14 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             datos['acumulada'] = acumulada_switch
             
             geometrica = d.getDistribution("Geometrica",datos)
-            
-            df = pd.DataFrame(geometrica.get_sample(geom_valor_x),columns=['n_gen'])
-            df['pdf'] = df['n_gen'].apply(lambda x: geometrica.get_probability(x))            
-            
+
+            if not acumulada_switch:
+                df = pd.DataFrame(geometrica.get_sample(geom_valor_x),columns=['n_gen'])
+                df['pdf'] = df['n_gen'].apply(lambda x: geometrica.get_probability(x))
+            else:
+                df = pd.DataFrame(geometrica.get_sample(geom_valor_x),columns=['n_gen'])
+                df['pdf'] = df['n_gen'].apply(lambda x: geometrica.get_probability_cdf(x))
+                        
         elif tipo_distribucion == 'Exponencial':
 
             datos = {}
@@ -305,10 +315,13 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             datos['acumulada'] = acumulada_switch
             
             exponencial = d.getDistribution("Exponencial",datos)
-            
-            df = pd.DataFrame(exponencial.get_sample(exp_valor_x),columns=['n_gen'])
-            df['pdf'] = df['n_gen'].apply(lambda x: exponencial.get_probability(x))
-                    
+
+            if not acumulada_switch:
+                df = pd.DataFrame(exponencial.get_sample(exp_valor_x),columns=['n_gen'])
+                df['pdf'] = df['n_gen'].apply(lambda x: exponencial.get_probability(x))
+            else:
+                df = pd.DataFrame(exponencial.get_sample(exp_valor_x),columns=['n_gen'])
+                df['pdf'] = df['n_gen'].apply(lambda x: exponencial.get_probability_cdf(x))
         else:
 
             datos = {}
@@ -318,10 +331,15 @@ def on_accept_click(n,tipo_distribucion,acumulada_switch,
             
             # Crear objeto distribucion normal
             normal = d.getDistribution("Normal",datos)
+
+            if not acumulada_switch:
+                df = pd.DataFrame(normal.get_sample(norm_valor_x),columns=['n_gen'])
+                df['pdf'] = df['n_gen'].apply(lambda x: normal.get_distribution(x))
+            else:
+                df = pd.DataFrame(normal.get_sample(norm_valor_x),columns=['n_gen'])
+                df['pdf'] = df['n_gen'].apply(lambda x: normal.get_probability_cdf(x))
             
-            df = pd.DataFrame(normal.get_sample(norm_valor_x),columns=['n_gen'])
-            df['pdf'] = df['n_gen'].apply(lambda x: normal.get_distribution(x))
-        
-        return go.Figure(data=[go.Scatter(x=df['n_gen'],y=df['pdf'],mode="markers")]),texto(tipo_distribucion)
+        # Regresar grafico de respuesta
+        return go.Figure(data=[go.Scatter(x=df['n_gen'],y=df['pdf'],mode="markers")]),texto(tipo_distribucion,acumulada_switch)
         
 app.run(host='0.0.0.0', port=5001, debug=True)
