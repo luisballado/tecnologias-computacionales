@@ -1,12 +1,19 @@
 # Distribuciones
 
-Simple overview of use/purpose.
+Calculo de Distribuciones para la clase de Tecnologias Computacionales
 
-## Description
+* Distribución Binomial
+* Distribución Poisson
+* Distribución Geometrica
+* Distribución Exponencial
+* Distribución Normal
 
-An in-depth paragraph about your project and overview of use.
+## Descripción
 
-## Getting Started
+El proyecto cuenta con tres archivos:
+* distribuciones.py - Clase abstracta que engloba los calculos de las distribuciones
+* server.py - Servidor para la visualización de la información con uso de Dash
+* textos_distribuciones.py - Función para englobar los textos que se incluyen en el proyecto
 
 ### Dependencies
 
